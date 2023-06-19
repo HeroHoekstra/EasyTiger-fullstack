@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyTiger Patio</title>
+
+    <!-- Main CSS -->
+    <link href="./css/style.css" type="text/css" rel="stylesheet">
+    <!-- CSS for the menu -->
+    <link href="./css/menu.css" type="text/css" rel="stylesheet">
+
+    <script src="./js/theme.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="open_menu">
+        <label for="open_menu">
+            <img src="./svg/list.svg" alt="menu icon" id="menu_icon">
+        </label>
+
+        <div id="menu">
+            <div id="menu-content">
+                <label for="open_menu">
+                    <img src="./svg/x-lg.svg" alt="close menu">
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+
+    </header>
+
+    <main>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript">
+        // Open menu
+        const menu_button = document.getElementById('open_menu');
+        const menu = document.getElementById('menu');
+
+        menu_button.addEventListener('click', () => {
+            menu_button.checked ? menu.style.display = 'none' : menu.style.display = 'block';
+
+            menu.classList.add('menu_open_animation');
+        });
+    </script>
+</body>
+</html>

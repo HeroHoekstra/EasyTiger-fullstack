@@ -1,0 +1,38 @@
+:root {
+    --text: #171a14;
+    --background: #edf0ea;
+    --primary-button: #c6becf;
+    --secondary-button: #ffffff;
+    --accent: #9284a4;
+}
+
+html, body {
+    margin: 0;
+    height: 100vh;
+
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+
+    background-color: var(--background);
+}
+
+nav {
+    position: absolute;
+    top: 0;
+
+    width: 100vw;
+
+    margin: 0;
+
+    background-color: var(--accent);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+
+    height: 2.5em;
+    width: 100vw;
+
+    background-color: var(--accent);
+}

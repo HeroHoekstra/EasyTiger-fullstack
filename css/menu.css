@@ -1,0 +1,45 @@
+/* Menu open animation */
+@keyframes menu_open {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    } to {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+.menu_open_animation {
+    animation: menu_open 0.5s infinite;
+}
+
+/* Menu button */
+#open_menu {
+    display: none;
+}
+
+#menu_icon {
+    height: 24px;
+}
+
+/* Main menu */
+#menu {
+    display: none;
+
+    position: absolute;
+    top: 0;
+
+    z-index: 10;
+
+    height: 100vh;
+    width: 100vw;
+
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#menu-content {
+    position: absolute;
+    
+    height: 100vh;
+    width: 20vw;
+
+    background-color: var(--primary-button);
+}
