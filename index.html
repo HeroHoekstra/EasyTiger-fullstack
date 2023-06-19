@@ -15,15 +15,18 @@
 
 <body>
     <nav>
+        <!-- Open menu button -->
         <input type="checkbox" id="open_menu">
         <label for="open_menu">
-            <img src="./svg/list.svg" alt="menu icon" id="menu_icon">
+            <img src="./svg/list.svg" alt="menu icon" class="menu-icon">
         </label>
 
+        <!-- Menu and menu content -->
         <div id="menu">
-            <div id="menu-content">
+            <div id="menu_content">
+                <!-- Close menu button -->
                 <label for="open_menu">
-                    <img src="./svg/x-lg.svg" alt="close menu">
+                    <img src="./svg/x-lg.svg" alt="close menu" class="menu-close">
                 </label>
             </div>
         </div>
@@ -41,43 +44,6 @@
 
     </footer>
 
-    <script type="text/javascript">
-        // Make delay function
-        function delay(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Animation function
-        async function menu_animation(name, checked) {
-            if (!checked) {
-                menu.style.display = 'block';
-            }
-
-            // Give animation class
-            menu.classList.add(name);
-
-            // Wait for animation to finish playing
-            await delay(250);
-
-            // Clear animation class
-            menu.classList.remove(name);
-
-            if (checked) {
-                menu.style.display = 'none';
-            }
-        }
-
-        // Open menu
-        const menu_button = document.getElementById('open_menu');
-        const menu = document.getElementById('menu');
-
-        menu_button.addEventListener('click', () => {
-            let checked = menu_button.checked;
-
-            //menu_button.checked ? menu.style.display = 'none' : menu.style.display = 'block';
-
-            menu_button.checked ? menu_animation('menu_close_animation', checked) : menu_animation('menu_open_animation', checked);
-        });
-    </script>
+    <script src="./js/menu_animations.js" type="text/javascript"> </script>
 </body>
 </html>

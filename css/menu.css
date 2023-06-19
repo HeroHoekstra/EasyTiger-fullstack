@@ -1,4 +1,5 @@
-/* Menu open animation */
+/* Menu open animations */
+/* Fade background */
 @keyframes menu_open {
     from {
         background-color: rgba(0, 0, 0, 0);
@@ -13,12 +14,33 @@
         background-color: rgba(0, 0, 0, 0);
     }
 }
-
 .menu_open_animation {
     animation: menu_open 150ms ease-in;
 }
 .menu_close_animation {
-    animation: menu_close 2000ms ease-in;
+    animation: menu_close 150ms ease-in;
+}
+
+/* Content slide */
+@keyframes menu_slide_in {
+    from {
+        left: -100%;
+    } to {
+        left: 0;
+    }
+}
+@keyframes menu_slide_out {
+    from {
+        left: 0;
+    } to {
+        left: -100%;
+    }
+}
+.menu_slide_in {
+    animation: menu_slide_in 150ms linear;
+}
+.menu_slide_out {
+    animation: menu_slide_out 150ms linear;
 }
 
 /* Menu button */
@@ -26,7 +48,7 @@
     display: none;
 }
 
-#menu_icon {
+.menu-icon {
     height: 24px;
 }
 
@@ -45,11 +67,21 @@
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-#menu-content {
+#menu_content {
     position: absolute;
-    
+    top: 0;
+    left: 0;
+  
     height: 100vh;
     width: 20vw;
+  
+    transition: 150ms ease-in;
 
     background-color: var(--primary-button);
+}
+.menu-close {
+    display: block;
+    margin-left: auto;
+
+    height: 24px;
 }
