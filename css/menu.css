@@ -6,9 +6,19 @@
         background-color: rgba(0, 0, 0, 0.75);
     }
 }
+@keyframes menu_close {
+    from {
+        background-color: rgba(0, 0, 0, 0.75);
+    } to {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
 
 .menu_open_animation {
-    animation: menu_open 0.5s infinite;
+    animation: menu_open 150ms ease-in;
+}
+.menu_close_animation {
+    animation: menu_close 2000ms ease-in;
 }
 
 /* Menu button */

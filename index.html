@@ -42,14 +42,41 @@
     </footer>
 
     <script type="text/javascript">
+        // Make delay function
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Animation function
+        async function menu_animation(name, checked) {
+            if (!checked) {
+                menu.style.display = 'block';
+            }
+
+            // Give animation class
+            menu.classList.add(name);
+
+            // Wait for animation to finish playing
+            await delay(250);
+
+            // Clear animation class
+            menu.classList.remove(name);
+
+            if (checked) {
+                menu.style.display = 'none';
+            }
+        }
+
         // Open menu
         const menu_button = document.getElementById('open_menu');
         const menu = document.getElementById('menu');
 
         menu_button.addEventListener('click', () => {
-            menu_button.checked ? menu.style.display = 'none' : menu.style.display = 'block';
+            let checked = menu_button.checked;
 
-            menu.classList.add('menu_open_animation');
+            //menu_button.checked ? menu.style.display = 'none' : menu.style.display = 'block';
+
+            menu_button.checked ? menu_animation('menu_close_animation', checked) : menu_animation('menu_open_animation', checked);
         });
     </script>
 </body>
