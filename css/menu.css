@@ -50,6 +50,8 @@
 
 .menu-icon {
     height: 24px;
+
+    cursor: pointer;
 }
 
 /* Main menu */
@@ -77,11 +79,18 @@
   
     transition: 150ms ease-in;
 
-    background-color: var(--primary-button);
+    background-color: var(--secondary-color);
 }
 .menu-close {
     display: block;
     margin-left: auto;
 
     height: 24px;
+
+    cursor: pointer;
+}
+
+/* Menu content */
+#theme {
+    display: none;
 }

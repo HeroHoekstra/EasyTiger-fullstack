@@ -1,9 +1,9 @@
 :root {
-    --text: #171a14;
-    --background: #edf0ea;
-    --primary-button: #c6becf;
-    --secondary-button: #ffffff;
-    --accent: #9284a4;
+    --text: #000;
+    --background: #fff;
+    --primary-color: #8fb4ff;
+    --secondary-color: #ebf1ff;
+    --accent: #ff8f94;
 }
 
 html, body {
@@ -12,6 +12,8 @@ html, body {
 
     color: var(--text);
     font-family: 'Inter', sans-serif;
+
+    transition: 150ms ease-in;
 
     background-color: var(--background);
 }
@@ -24,7 +26,7 @@ nav {
 
     margin: 0;
 
-    background-color: var(--accent);
+    background-color: var(--primary-color);
 }
 
 footer {
@@ -34,5 +36,5 @@ footer {
     height: 2.5em;
     width: 100vw;
 
-    background-color: var(--accent);
+    background-color: var(--primary-color);
 }

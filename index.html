@@ -28,6 +28,13 @@
                 <label for="open_menu">
                     <img src="./svg/x-lg.svg" alt="close menu" class="menu-close">
                 </label>
+
+                <!-- Theme -->
+                <input type="checkbox" id="theme">
+                <label for="theme">
+                    <img src="./svg/brightness-high-fill.svg" id="light_mode">
+                    <img src="./svg/moon-stars-fill.svg" id="dark_mode">
+                </label>
             </div>
         </div>
     </nav>
@@ -45,5 +52,35 @@
     </footer>
 
     <script src="./js/menu_animations.js" type="text/javascript"> </script>
+    <script type="text/javascript">
+        // Get variables
+        const theme_button = document.getElementById('theme');
+        const light = document.getElementById('light_mode');
+        const dark = document.getElementById('dark_mode');
+
+        // Set initial button and theme
+        if (theme_button.checked) {
+            set_dark();
+            light.style.display = 'none';
+            dark.style.display = 'block';
+        } else {
+            set_light();
+            light.style.display = 'block';
+            dark.style.display = 'none';
+        }
+
+        // Update button and theme
+        theme_button.addEventListener('click', () => {
+            if (theme_button.checked) {
+                set_dark();
+                light.style.display = 'none';
+                dark.style.display = 'block';
+            } else {
+                set_light();
+                light.style.display = 'block';
+                dark.style.display = 'none';
+            }
+        }); 
+    </script>
 </body>
 </html>
