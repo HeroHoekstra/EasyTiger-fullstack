@@ -19,22 +19,44 @@ html, body {
 }
 
 nav {
-    position: absolute;
-    top: 0;
+    display: block;
+    margin-top: auto;
 
     width: 100vw;
 
     margin: 0;
 
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
 }
 
+/* Footer */
 footer {
-    position: absolute;
-    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 50vw);
+    grid-row-gap: 10px;
 
-    height: 2.5em;
-    width: 100vw;
+    margin-bottom: auto;
+    padding: 10px;
 
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+footer p, footer ul {
+    margin: 0;
+
+    list-style: none;
+}
+
+footer li {
+    margin-left: 15px;
+}
+
+.links a {
+    color: var(--text);
+
+    text-decoration: none;
+}
+
+.disclaimer li {
+    font-size: 8px;
 }

@@ -1,3 +1,5 @@
+// Create all the functions to change the theme of the site
+// Get variable
 const styles = document.documentElement.style;
 
 // Light theme

@@ -79,7 +79,7 @@
   
     transition: 150ms ease-in;
 
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 .menu-close {
     display: block;

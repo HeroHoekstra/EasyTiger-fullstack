@@ -1,3 +1,5 @@
+// Animate and add functionality to the menu
+// With functionality I mean make it pop out from the left
 // Make delay function
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
