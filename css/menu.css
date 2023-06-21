@@ -43,6 +43,22 @@
     animation: menu_slide_out 150ms linear;
 }
 
+/* Menu background */
+.menu-background {
+    display: none;
+
+    position: absolute;
+    top: 0;
+
+    z-index: 10;
+
+    height: 100svh;
+    width: 100svw;
+
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* Nav menu */
 /* Menu button */
 #open_menu {
     display: none;
@@ -52,30 +68,17 @@
     height: 24px;
 
     cursor: pointer;
+    user-select: none;
 }
 
 /* Main menu */
-#menu {
-    display: none;
-
-    position: absolute;
-    top: 0;
-
-    z-index: 10;
-
-    height: 100vh;
-    width: 100vw;
-
-    background-color: rgba(0, 0, 0, 0.75);
-}
-
 #menu_content {
     position: absolute;
     top: 0;
     left: 0;
   
-    height: 100vh;
-    width: 20vw;
+    height: 100svh;
+    width: 20svw;
   
     transition: 150ms ease-in;
 
@@ -88,9 +91,62 @@
     height: 24px;
 
     cursor: pointer;
+    user-select: none;
 }
 
 /* Menu content */
 #theme {
     display: none;
+}
+
+
+/* Login menu */
+/* Basic things like background and dimentions */
+#login_button {
+    display: none;
+}
+#login_menu_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: min-content;
+    width: 30svw;
+
+    padding: 10px;
+
+    z-index: 15;
+
+    background-color: var(--background);
+}
+
+/* Input fields */
+.login-form {
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
+    grid-row-gap: 10px;
+}
+
+.input-border {
+    position: absolute;
+
+    height: 5px;
+    width: 0;
+
+    transition: 250ms ease-in;
+
+    background-color: greenyellow;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img{
+    height: 40svh;
+
+    aspect-ratio: 1 / 1;
 }
