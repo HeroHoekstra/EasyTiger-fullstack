@@ -1,6 +1,7 @@
 // Animate and add functionality to the menu
 // With functionality I mean make it pop out from the left
 // Also the login menu (menu is menu)
+
 // Make delay function
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -40,9 +41,14 @@ menu_button.checked = false;
 // When the menu button is clicked
 function menu_open() {
     let checked = menu_button.checked;
+    // a11y
+    checked ? any_menu_open(true) : any_menu_open(false);
 
     // Change display to block
-    if (checked) menu.style.display = 'block';
+    if (checked) {
+        menu.style.display = 'block';
+        menu_content.style.display = 'block';
+    }
 
     // Slide menu box
     checked ? menu_slide('menu_slide_in') : menu_slide('menu_slide_out');
@@ -52,7 +58,10 @@ function menu_open() {
 
     // Delay changing the display property to none
     setTimeout(() => {
-        if (!checked) menu.style.display = 'none';
+        if (!checked) {
+            menu.style.display = 'none';
+            menu_content.style.display = 'none';
+        }
     }, 120);
 };
 menu_button.addEventListener('click', () => {menu_open();});
@@ -67,6 +76,8 @@ login_button.checked = false;
 
 function login_menu_open() {
     let checked = login_button.checked;
+    // a11y
+    checked ? any_menu_open(true) : any_menu_open(false);
 
     // Change display to block
     if (checked) login_menu.style.display = 'block';

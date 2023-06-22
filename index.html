@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/png/favicon.png" type="image/x-icon" rel="icon">
+    <link href="./assets/webp/favicon.webp" type="image/x-icon" rel="icon">
     <title>Easy Tiger Patio</title>
 
     <!-- Main CSS -->
@@ -20,7 +20,7 @@
     <nav>
         <!-- Open menu button -->
         <input type="checkbox" id="open_menu">
-        <label for="open_menu" role="open the menu">
+        <label for="open_menu" role="open the menu" tabindex="0" class="menu-icon">
             <img src="./assets/svg/misc/list.svg" alt="menu button" class="menu-icon">
         </label>
 
@@ -28,13 +28,13 @@
         <div id="menu" class="menu-background">
             <div id="menu_content">
                 <!-- Close menu button -->
-                <label for="open_menu" role="close the menu">
+                <label for="open_menu" role="close the menu" tabindex="0">
                     <img src="./assets/svg/misc/x-lg.svg" alt="close menu button" class="menu-close">
                 </label>
 
                 <!-- Theme -->
                 <input type="checkbox" id="theme">
-                <label for="theme" role="change website theme">
+                <label for="theme" role="change website theme" tabindex="0">
                     <img src="./assets/svg/theme/brightness-high-fill.svg" id="light_mode">
                     <img src="./assets/svg/theme/moon-stars-fill.svg" id="dark_mode">
                 </label>
@@ -43,22 +43,22 @@
 
         <!-- Login and signup -->
         <input type="checkbox" id="login_button">
-        <label for="login_button" class="login" role="open login menu">
+        <label for="login_button" class="login" role="open login menu" tabindex="0">
             <img src="./assets/svg/user/person-circle.svg" alt="login button"> Login
         </label>
     </nav>
 
     <!-- Login menu -->
-    <div id="login_menu" class="menu-background">
+    <div id="login_menu" class="menu-background" role="login menu">
         <div id="login_menu_content">
             <!-- Close menu -->
-            <label for="login_button" role="close login menu" tabindex=0>
+            <label for="login_button" role="close login menu" tabindex="0">
                 <img src="./assets/svg/misc/x-lg.svg" alt="close login menu button" class="menu-close">
             </label>
     
             <!-- Logo -->
             <div class="logo">
-                <img src="./assets/png/tiger logo.png" alt="easy tiger logo">
+                <img src="./assets/webp/tiger logo.webp" alt="easy tiger logo">
             </div>
     
             <!-- Login form -->
@@ -81,7 +81,10 @@
     </div>
 
     <header>
-        <!--<h1 class="title">Welcome to Easy Tiger Patio: Where Music Comes To Life</h1>-->
+        <div class="title">
+            <h1 role="title">Welcome to Easy Tiger Patio: Where Music Comes To Life</h1>
+            <img src="./assets/webp/concert.webp" class="title-image" role="header image" alt="concert with orange spotlights">
+        </div>
     </header>
 
     <main>
@@ -90,7 +93,7 @@
 
     <footer>
         <!-- Contact -->
-        <ul>
+        <ul role="contact list">
             <p><b>Contact us:</b></p>
             <li>Easy Tiger Patio</li>
             <li>123 Main Street, Cityville</li>
@@ -99,21 +102,34 @@
         </ul>
 
         <!-- Links -->
-        <ul class="links">
+        <ul class="links" role="social media list">
             <p><b>Follow us:</b></p>
-            <li><a href="https://youtu.be/ee6DUqNarek" target="_blank"><img src="./assets/svg/social/youtube.svg" alt="youtube logo"> Youtube</a></li>
-            <li><a href="https://twitter.com/KFC_ES" target="_blank"><img src="./assets/svg/social/twitter.svg" alt="twitter logo"> Twitter</a></li>
-            <li><a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank"><img src="./assets/svg/social/tumblr.svg" alt="tumblr logo"> Tumblr</a></li>
+            <li>
+                <a href="https://youtu.be/ee6DUqNarek" target="_blank" class="footer-link" tabindex="0">
+                    <img src="./assets/svg/social/youtube.svg" alt="youtube logo"> Youtube
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/KFC_ES" target="_blank" class="footer-link" tabindex="0">
+                    <img src="./assets/svg/social/twitter.svg" alt="twitter logo"> Twitter
+                </a>
+            </li>
+            <li>
+                <a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank" class="footer-link" tabindex="0">
+                    <img src="./assets/svg/social/tumblr.svg" alt="tumblr logo"> Tumblr
+                </a>
+            </li>
         </ul>
 
-        <ul class="disclaimer">
+        <ul class="disclaimer" role="TOS and disclaimer">
             <li>Terms of Service | Privacy Policy | Copyright © 2023 Easy Tiger Patio</li>
             <li>Disclaimer: This website is a fictional creation for educational purposes only.</li>
         </ul>
     </footer>
 
     <!-- Get all javascript files -->
-    <script src="./js/menu_animations.js" type="text/javascript"> </script>
-    <script src="./js/set_theme.js" type="text/javascript"> </script>
+    <script src="./js/a11y.js" type="text/javascript" defer> </script>
+    <script src="./js/menu_animations.js" type="text/javascript" defer> </script>
+    <script src="./js/set_theme.js" type="text/javascript" defer> </script>
 </body>
 </html>

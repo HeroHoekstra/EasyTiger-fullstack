@@ -31,7 +31,7 @@
 }
 @keyframes menu_slide_out {
     from {
-        left: 0;
+        left: -13px;
     } to {
         left: -100%;
     }
@@ -75,7 +75,7 @@
 #menu_content {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -13px;
   
     height: 100svh;
     width: 20svw;

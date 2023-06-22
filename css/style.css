@@ -21,11 +21,15 @@ html, body {
 /* Navigation */
 nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     margin-top: auto;
 
     width: 100svw;
 
     margin: 0;
+    padding: 13px;
 
     background-color: var(--secondary-color);
 }
@@ -34,11 +38,12 @@ nav {
 .login {
     position: relative;
 
-    border: solid 3px var(--text);
+    border: solid 2px var(--text);
     border-radius: 20px;
 
     padding: 5px;
     padding-left: 23px;
+    margin-right: 75px;
 
     text-align: center;
     text-decoration: none;

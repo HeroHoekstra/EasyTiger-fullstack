@@ -1,15 +1,20 @@
 /* Header */
 header {
-    height: 100svh;
     width: 100svw;
     
-    background-color: var(--primary-color);
+    background-color: #000;
+    color: #fff;
 }
 
 .title {
-    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
 
-    width: max-content;
+    justify-content: center;
+    align-items: center;
 
-    text-align: center;
+    padding: 30px;
+}
+.title img {
+    width: 80svw;
 }
