@@ -20,80 +20,140 @@
     <nav>
         <!-- Open menu button -->
         <input type="checkbox" id="open_menu">
-        <label for="open_menu" role="open the menu" tabindex="0" class="menu-icon">
-            <img src="./assets/svg/misc/list.svg" alt="menu button" class="menu-icon">
+        <label for="open_menu" role="button" aria-label="Open the menu" tabindex="0" class="menu-icon">
+            <img src="./assets/svg/misc/list.svg" alt="Menu button" class="menu-icon">
         </label>
 
         <!-- Menu and menu content -->
         <div id="menu" class="menu-background">
             <div id="menu_content">
-                <!-- Close menu button -->
-                <label for="open_menu" role="close the menu" tabindex="0">
-                    <img src="./assets/svg/misc/x-lg.svg" alt="close menu button" class="menu-close">
-                </label>
+            <!-- Close menu button -->
+            <label for="open_menu" role="button" aria-label="Close the menu" tabindex="0">
+                <img src="./assets/svg/misc/x-lg.svg" alt="Close menu button" class="menu-close">
+            </label>
 
-                <!-- Theme -->
-                <input type="checkbox" id="theme">
-                <label for="theme" role="change website theme" tabindex="0">
-                    <img src="./assets/svg/theme/brightness-high-fill.svg" id="light_mode">
-                    <img src="./assets/svg/theme/moon-stars-fill.svg" id="dark_mode">
-                </label>
+            <!-- Theme -->
+            <input type="checkbox" id="theme">
+            <label for="theme" role="button" aria-label="Change website theme" tabindex="0">
+                <img src="./assets/svg/theme/brightness-high-fill.svg" id="light_mode">
+                <img src="./assets/svg/theme/moon-stars-fill.svg" id="dark_mode">
+            </label>
             </div>
         </div>
 
         <!-- Login and signup -->
         <input type="checkbox" id="login_button">
-        <label for="login_button" class="login" role="open login menu" tabindex="0">
-            <img src="./assets/svg/user/person-circle.svg" alt="login button"> Login
+        <label for="login_button" class="login" role="button" aria-label="Open login menu" tabindex="0">
+            <img src="./assets/svg/user/person-circle.svg" alt="Login button"> Login
         </label>
     </nav>
 
+
     <!-- Login menu -->
-    <div id="login_menu" class="menu-background" role="login menu">
+    <div id="login_menu" class="menu-background" role="dialog" aria-label="Login menu">
         <div id="login_menu_content">
             <!-- Close menu -->
-            <label for="login_button" role="close login menu" tabindex="0">
-                <img src="./assets/svg/misc/x-lg.svg" alt="close login menu button" class="menu-close">
-            </label>
-    
+            <button id="login_button" aria-label="Close login menu" tabindex="0">
+                <img src="./assets/svg/misc/x-lg.svg" alt="Close login menu button" class="menu-close">
+            </button>
+        
             <!-- Logo -->
             <div class="logo">
-                <img src="./assets/webp/tiger logo.webp" alt="easy tiger logo">
+                <img src="./assets/webp/tiger logo.webp" alt="Easy Tiger logo">
             </div>
-    
+        
             <!-- Login form -->
-            <form method="post" action="#" class="login-form">
-                <label for="email"><b>Email: </b></label>
+            <form method="post" action="#" class="login-form" aria-label="Login form">
+                <label for="email"><b>Email:</b></label>
                 <div class="input">
-                    <input type="email" id="email" name="email" required maxlength="320">
-                    <div class="input-border"> </div>
+                <input type="email" id="email" name="email" required maxlength="320" aria-required="true" aria-label="Email input field">
+                <div class="input-border"></div>
                 </div>
-
-                <label for="pass"><b>Password: </b></label>
+        
+                <label for="pass"><b>Password:</b></label>
                 <div class="input">
-                    <input type="password" id="pass" name="pass" required>
-                    <div class="input-border"> </div>
+                <input type="password" id="pass" name="pass" required aria-required="true" aria-label="Password input field">
+                <div class="input-border"></div>
                 </div>
-    
-                <input type="submit" name="submit" value="submit">
+        
+                <input type="submit" name="submit" value="Submit" role="button" aria-label="Submit login information button">
             </form>
         </div>
     </div>
+  
 
     <header>
         <div class="title">
-            <h1 role="title">Welcome to Easy Tiger Patio: Where Music Comes To Life</h1>
-            <img src="./assets/webp/concert.webp" class="title-image" role="header image" alt="concert with orange spotlights">
+          <h1>Welcome to Easy Tiger Patio: Where Music Comes To Life</h1>
+          <img src="./assets/webp/concert.webp" class="title-image" alt="Concert with orange spotlights" aria-label="Concert with orange spotlights">
         </div>
-    </header>
+    </header>  
 
     <main>
+        <!-- About us -->
+        <div class="subsection" role="region" aria-label="about us section">
+            <h2 class="subsection-title" role="heading" aria-level="2">About Us:</h2>
+            <p class="subsection-text" aria-label="About Us Text">
+              Easy Tiger Patio is a unique cafe and music theater that brings together great music and a cozy atmosphere. We are passionate about hosting unforgettable music nights featuring talented bands from various genres. Our mission is to provide a platform for artists to showcase their skills and for music enthusiasts to immerse themselves in a vibrant and engaging experience.
+            </p>
+        </div>
+        <!-- Our events -->       
+        <div class="subsection" role="region" aria-label="our events section">
+            <h2 class="subsection-title" role="heading" aria-level="2">Our Events:</h2>
+            <p class="subsection-text" aria-label="our events text">
+                At Easy Tiger Patio, we curate an exciting lineup of bands and musicians who deliver outstanding performances. From electrifying headlining acts to talented supporting bands, our events cater to diverse musical tastes. On special occasions, we also organize festivals where multiple headlining acts captivate the audience throughout the day or evening.
+                <br>
+                Join us for a night filled with exceptional live music, energetic performances, and a warm, inviting ambiance. Whether you're a die-hard fan or just looking for a memorable evening out, Easy Tiger Patio is the place to be.
+            </p>
+        </div>
+        <!-- Band showcase -->
+        <div class="subsection" role="region" aria-label="band showcase section">
+            <h2 class="subsection-title" role="header" aria-level="2">Band Showcase:</h2>
+            <p class="subsection-text" aria-label="band showcase text">
+                We take pride in showcasing incredible bands and their unique talents. Get to know the bands that grace our stage, their music genres, origins, and captivating descriptions. You'll find a diverse range of artists, each with their own distinct style and sound.
+            </p>
+        </div>
+        <!-- Tickets and admission -->
+        <div class="subsection" role="region" aria-label="tickets and admission">
+            <h2 class="subsection-title" role="header" aria-level="2">Tickets and Admission:</h2>
+            <p class="subsection-text" aria-label="tickets and admission text">
+                While some of our events offer free admission, many require purchasing tickets to ensure the best experience for our guests. We believe in supporting the artists, and their performances come at a price. Stay tuned for upcoming events and ticket availability, as we bring you the best in live music entertainment.
+            </p>
+        </div>
+        <!-- Experiance and enjoyment -->
+        <div class="subsection" role="region" aria-label="experience and enjoyment">
+            <h2 class="subsection-title" role="header" aria-level="2">Experience and Enjoyment:</h2>
+            <p class="subsection-text" aria-label="experience and enjoyment text">
+                Easy Tiger Patio isn't just about the music; it's about creating a memorable experience for every visitor. With a friendly and attentive staff, comfortable seating, and an inviting ambiance, we strive to make your time with us truly enjoyable. Sit back, relax, and let the music transport you to a place of pure bliss.
+            </p>
+        </div>
 
+        <!-- Future events and prices -->
+        <div class="subsection upcoming" role="region" aria-label="upcoming events information">
+            <div class="upcoming-content">
+                <div class="upcoming-event">
+                    <h2 class="event-title" role="header" aria-level="2">The ball buster 9000</h2>
+                    <h3 class="event-date">28-06</h3>
+                    <h4 class="event-genre">Indie</h4>
+                    <h5 class="tickets-left">There are -10 tickets left</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stay connected -->
+        <div class="subsection" role="region" ariab-label="stay connected">
+            <h2 class="subsection-title" role="header" aria-level="2">Stay Connected:</h2>
+            <p class="subsection-text" aria-label="stay connected text">
+                To stay up to date with the latest news, upcoming events, and special offers, join our mailing list or follow us on social media. Don't miss out on the exciting performances and exclusive promotions happening at Easy Tiger Patio.
+                <br>
+                Join us at Easy Tiger Patio, where music comes alive and memories are made. We look forward to welcoming you to our vibrant music community.
+            </p>
+        </div>
     </main>
 
     <footer>
         <!-- Contact -->
-        <ul role="contact list">
+        <ul>
             <p><b>Contact us:</b></p>
             <li>Easy Tiger Patio</li>
             <li>123 Main Street, Cityville</li>
@@ -102,30 +162,32 @@
         </ul>
 
         <!-- Links -->
-        <ul class="links" role="social media list">
+        <ul class="links">
             <p><b>Follow us:</b></p>
             <li>
-                <a href="https://youtu.be/ee6DUqNarek" target="_blank" class="footer-link" tabindex="0">
-                    <img src="./assets/svg/social/youtube.svg" alt="youtube logo"> Youtube
-                </a>
+            <a href="https://youtu.be/ee6DUqNarek" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our YouTube channel">
+                <img src="./assets/svg/social/youtube.svg" alt="YouTube logo"> Youtube
+            </a>
             </li>
             <li>
-                <a href="https://twitter.com/KFC_ES" target="_blank" class="footer-link" tabindex="0">
-                    <img src="./assets/svg/social/twitter.svg" alt="twitter logo"> Twitter
-                </a>
+            <a href="https://twitter.com/KFC_ES" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our Twitter profile">
+                <img src="./assets/svg/social/twitter.svg" alt="Twitter logo"> Twitter
+            </a>
             </li>
             <li>
-                <a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank" class="footer-link" tabindex="0">
-                    <img src="./assets/svg/social/tumblr.svg" alt="tumblr logo"> Tumblr
-                </a>
+            <a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our Tumblr blog">
+                <img src="./assets/svg/social/tumblr.svg" alt="Tumblr logo"> Tumblr
+            </a>
             </li>
         </ul>
 
-        <ul class="disclaimer" role="TOS and disclaimer">
+        <!-- Disclaimer -->
+        <ul class="disclaimer">
             <li>Terms of Service | Privacy Policy | Copyright © 2023 Easy Tiger Patio</li>
             <li>Disclaimer: This website is a fictional creation for educational purposes only.</li>
         </ul>
     </footer>
+
 
     <!-- Get all javascript files -->
     <script src="./js/a11y.js" type="text/javascript" defer> </script>
