@@ -1,5 +1,5 @@
 <?php
-include '../connect.php';
+include '../php/connect.php';
 
 function band_id($pdo) {
     $band_id = hexdec(uniqid());
@@ -38,6 +38,4 @@ try {
 } catch (Exception $e) {
     print("Error!: <br>" . $e->getMessage() . "<br>");
 }
-
-
 ?>

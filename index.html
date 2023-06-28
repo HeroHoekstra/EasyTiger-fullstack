@@ -63,22 +63,75 @@
             </div>
         
             <!-- Login form -->
-            <form method="post" action="#" class="login-form" aria-label="Login form">
+            <form method="post" action="./php/login.php" class="login-form" id="login" aria-label="Login form">
                 <label for="email"><b>Email:</b></label>
                 <div class="input">
-                <input type="email" id="email" name="email" required maxlength="320" aria-required="true" aria-label="Email input field">
-                <div class="input-border"></div>
+                    <input type="email" id="email" name="email" required maxlength="320" aria-required="true" aria-label="Email input field">
+                    <div class="input-border"></div>
                 </div>
         
                 <label for="pass"><b>Password:</b></label>
                 <div class="input">
-                <input type="password" id="pass" name="pass" required aria-required="true" aria-label="Password input field">
-                <div class="input-border"></div>
+                    <input type="password" id="pass" name="pass" required aria-required="true" aria-label="Password input field">
+                    <div class="input-border"></div>
                 </div>
         
-                <input type="submit" name="submit" value="Submit" role="button" aria-label="Submit login information button">
+                <input type="submit" name="submit" value="Log in" role="button" aria-label="Submit login information button">
             </form>
-            <button role="button" aria-label="switch to sign up">Don't have an account?</button>
+
+            <form method="post" action="./php/login.php" class="login-form" id="sign_up" aria-label="Login form">
+                <label for="username"><b>Username:</b></label>
+                <div>
+                    <input type="text" id="username" name="username" required maxlength="320" aria-required="true" aria-label="username input field">
+                    <div class="input-border"></div>
+                </div>
+
+                <label for="email"><b>Email:</b></label>
+                <div class="input">
+                    <input type="email" id="email" name="email" required maxlength="320" aria-required="true" aria-label="Email input field">
+                    <div class="input-border"></div>
+                </div>
+
+                <label for="pc"><b>Zip code:</b></label>
+                <div class="input">
+                    <input type="text" id="pc" name="pc" required maxlength="15" aria-required="true" aria-label="zip code input field">
+                    <div class="input-border"></div>
+                </div>
+        
+                <label for="pass"><b>Password:</b></label>
+                <div class="input">
+                    <input type="password" id="pass" name="pass" required aria-required="true" aria-label="Password input field">
+                    <div class="input-border"></div>
+                </div>
+
+                <label for="pass_con"><b>Confirm Password:</b></label>
+                <div class="input">
+                    <input type="password" id="pass" name="pass_con" required aria-label="true" aria-label="confirm password input field">
+                    <div class="input-border"></div>
+                </div>
+
+                <input type="submit" name="submit" value="Sign up" role="button" aria-label="Submit login information button">
+            </form>
+            <button id="switch_login_mode" role="button" aria-label="switch to sign up">Don't have an account?</button>
+            <script type="text/javascript">
+                const butn = document.getElementById('switch_login_mode');
+                const login_form = document.getElementById('login');
+                const sign_up_form = document.getElementById('sign_up');
+
+                let login = true;
+                function set_login_form(login) {
+                    login ? login_form.style.display = "grid" : login_form.style.display = "none";
+                    login ? sign_up_form.style.display = "none" : sign_up_form.style.display = "grid";
+                    login ? butn.innerText = "Don't have an account?" : butn.innerText = "Already have an account?";
+                }
+
+                set_login_form(login);
+
+                butn.addEventListener('click', () => {
+                    login ? login = false : login = true;
+                    set_login_form(login);
+                });
+            </script>
         </div>
     </div>
   
