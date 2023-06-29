@@ -17,8 +17,6 @@ function band_id($pdo) {
     }
 }
 
-print_r($_POST);
-
 try {
     $band_id = band_id($pdo);
     $name = $_POST['name'];
