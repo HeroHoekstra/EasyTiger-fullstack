@@ -1,7 +1,7 @@
 <?php
 // Err1: sign up, passes are not the same
 // Err2: sign up, email already exists
-// Err3: login, email is not in db
+// Err3: login, incorrect email or password
 
 include 'connect.php';
 
@@ -40,7 +40,18 @@ try {
             exit();
         }
 
-        print_r($user);
+        // Check if the correct password is used
+        if (!password_verify($pass, $user[0]['Pass'])) {
+            setcookie('err3', true, time() + 3, '/');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+        
+        // We passed all checks :)
+        // Create cookie that makes us stay logged in
+        setcookie('logged_in', true, time() + (3600 * 24) * 30, '/');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
     } else if ($_POST['submit'] == 'Sign up'){
         // If the 2 passes are not the same
         // return (L typing)
@@ -65,12 +76,13 @@ try {
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $result = $stmt->fetchAll();
+
         if (!empty($result)) {
             setcookie('err2', true, time() + 3, '/');
-            echo "balls";
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit();
         }
+
         // Clear statement
         unset($result);
         $stmt->closeCursor();
@@ -78,12 +90,13 @@ try {
 
         // Passed all checks
         // Insert into database
-        $stmt = $pdo->prepare('INSERT INTO `bezoeker` (`Bezoeker_id`, `Username`, `Email`, `Postcode`, `Pass`) VALUES (:id, :username, :email, :zip, :pass)');
+        $stmt = $pdo->prepare('INSERT INTO `bezoeker` (`Bezoeker_id`, `Username`, `Email`, `Postcode`, `Pass`, `Is_Admin`) VALUES (:id, :username, :email, :zip, :pass, :is_admin)');
         $stmt->bindParam(':id', $user_id);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':zip', $pc);
         $stmt->bindParam(':pass', $pass);
+        $stmt->bindParam(':is_admin', 0);
         $stmt->execute();
 
         $lastInsertId = $pdo->lastInsertId(); // Retrieve the last inserted ID

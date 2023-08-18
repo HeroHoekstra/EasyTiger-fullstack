@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
 </head>
 <body>
-    <div>
+    <!--<div>
         <h1>Create new band</h1>
         <form action="response.php" method="post">
             Band naam: <input type="text" name="name" max="250" required><br>
@@ -15,6 +15,25 @@
             Description: <input type="text" name="desc" required><br>
             <input type="submit" name="submit">
         </form>
+    </div>-->
+
+    <div>
+        <h1>Create a new band</h1>
+        <input type="checkbox" id="open_band_menu" class="open_menu_button">
+        <label for="open_band_menu" role="button" aria-label="Open create band menu" tabindex="0">
+            <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img">
+        </label>
     </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.open_menu_button');
+        const img = document.querySelectorAll('.open_menu_img');
+
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', () => {
+                buttons[i].checked ? img[i].style.rotate = '0deg' : img[i].style.rotate = '90deg';
+            });
+        }
+    </script>
 </body>
 </html>
