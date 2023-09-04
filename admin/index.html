@@ -4,36 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
+
+    <!-- Main CSS -->
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <!-- This page CSS -->
+    <link href="../css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!--<div>
-        <h1>Create new band</h1>
-        <form action="response.php" method="post">
-            Band naam: <input type="text" name="name" max="250" required><br>
-            Genre: <input type="text" name="genre" max="250" required><br>
-            Herkomst: <input type="text" name="origin" max="250" required><br>
-            Description: <input type="text" name="desc" required><br>
-            <input type="submit" name="submit">
-        </form>
-    </div>-->
+    <main>
+        <!--<div>
+            <h1>Create new band</h1>
+            <form action="response.php" method="post">
+                Band naam: <input type="text" name="name" max="250" required><br>
+                Genre: <input type="text" name="genre" max="250" required><br>
+                Herkomst: <input type="text" name="origin" max="250" required><br>
+                Description: <input type="text" name="desc" required><br>
+                <input type="submit" name="submit">
+            </form>
+        </div>-->
 
-    <div>
-        <h1>Create a new band</h1>
-        <input type="checkbox" id="open_band_menu" class="open_menu_button">
-        <label for="open_band_menu" role="button" aria-label="Open create band menu" tabindex="0">
-            <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img">
-        </label>
-    </div>
+        <div class="add_band">
+            <input type="checkbox" id="open_band_menu" class="open_menu_button">
+            <label for="open_band_menu" role="button" aria-label="Open create band menu" tabindex="0">
+                <h1 class="open_menu_text">Create a new band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
+            </label>
 
-    <script>
-        const buttons = document.querySelectorAll('.open_menu_button');
-        const img = document.querySelectorAll('.open_menu_img');
+            <div class="menu_content menu_openable">
+                <form action="#" method="post">
+                    <ul>
+                        <li>
+                            <h3 class="item_title">Band name:</h3>
+                            <input type="text" name="band_name" role="textbox" aria-label="Textbox for the bands name" tabindex="0" maxlength="250" required>
+                        </li>
+                        <br>
+                        <li>
+                            <h3 class="item_title">Genre:</h3>
+                            <input type="text" name="genre" role="textbox" aria-label="Textbox for band genre" tabindex="0" maxlength="250" required>
+                        </li>
+                        <br>
+                        <li>
+                            <h3 class="item_title">Origin:</h3>
+                            <input type="text" name="origin" role="textbox" aria-label="Textbox for band origin" tabindex="0" maxlength="250" required>
+                        </li>
+                        <br>
+                        <li>
+                            <h3 class="item_title">Description:</h3>
+                            <textarea role="textbox" name="desc" aria-label="Bigger textbox for band discription" tabindex="0" maxlength="65535" required></textarea>
+                        </li>
+                        <br>
 
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', () => {
-                buttons[i].checked ? img[i].style.rotate = '0deg' : img[i].style.rotate = '90deg';
-            });
-        }
-    </script>
+                        <li>
+                            <div class="add_people">
+                                <h3 class="item_title">Add person to band list</h3>
+                                <input type="checkbox" id="add_people" class="add_item">
+                                <label for="add_people" role="button" aria-label="Add a person to band list" tabindex="0">
+                                    <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
+                                </label>
+                                <input type="checkbox" id="remove_people" class="remove_item">
+                                <label for="remove_people" role="button" aria-label="Remove a person to band list" tabindex="0">
+                                    <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
+                                </label>
+                                <input type="checkbox" id="open_band_member_menu" class="open_menu_button">
+                                <label for="open_band_member_menu" role="button" aria-label="Open create band menu" tabindex="0">
+                                    <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
+                                </label>
+                            </div>
+                            <ul id="people" class="menu_openable">
+
+                            </ul>
+                        </li>
+
+                        <input type="submit" value="Create Band" role="button" aria-label="Add band to database">
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="add people.js"></script>
+    <script src="../js/a11y.js"></script>
 </body>
 </html>
