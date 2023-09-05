@@ -1,39 +1,98 @@
 <?php
 include '../php/connect.php';
 
-function band_id($pdo) {
-    $band_id = hexdec(uniqid());
+function uniq_id($pdo, $needed_id) {
+    $uniq_id = hexdec(uniqid());
 
-    $query = $pdo->prepare("SELECT `band_id` FROM `band` WHERE `band_id` = :band_id");
-    $query->bindparam(":band_id", $band_id);
+    if ($needed_id == 'band') {
+        $query = $pdo->prepare("SELECT `Band_id` FROM `band` WHERE `Band_id` = :uniq_id");
+    } else {
+        $query = $pdo->prepare("SELECT `Lid_id` FROM `bandleden` WHERE `Lid_id` = :uniq_id");
+    }
+
+    $query->bindParam(":uniq_id", $uniq_id);
     $query->execute();
 
     $result = $query->fetchAll();
 
     if ($result != NULL) {
-        band_id();
+        return uniq_id($pdo, $needed_id);
     } else {
-        return $band_id;
+        return $uniq_id;
     }
 }
 
-try {
-    $band_id = band_id($pdo);
-    $name = $_POST['name'];
+
+if (isset($_POST['add_band'])) {
+    // Get band info
+    $band_id = uniq_id($pdo, 'band');
+    $band_name = $_POST['band_name'];
     $genre = $_POST['genre'];
     $origin = $_POST['origin'];
     $desc = $_POST['desc'];
 
-    $query = $pdo->prepare("INSERT INTO `band` 
-        (`Band_id`, `Naam`, `Genre`, `Herkomst`, `Omschrijving`)
-        VALUES (:band_id, :name, :genre, :origin, :desc)");
-    $query->bindparam(":band_id", $band_id);
-    $query->bindparam(":name", $name);
-    $query->bindparam(":genre", $genre);
-    $query->bindparam(":origin", $origin);
-    $query->bindparam(":desc", $desc);
-    $query->execute();
-} catch (Exception $e) {
-    print("Error!: <br>" . $e->getMessage() . "<br>");
+    // Get band member info
+    $bandm_name = array();
+    $bandm_email = array();
+    $bandm_phone = array();
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'band_name_') === 0) {
+            array_push($bandm_name, $value);
+        } else if (strpos($key, 'band_email_') === 0) {
+            array_push($bandm_email, $value);
+        } else if (strpos($key, 'band_phone_') === 0) {
+            array_push($bandm_phone, $value);
+        }
+    }
+
+    $bandm_id = array();
+    foreach ($bandm_name as $member => $index) {
+        array_push($bandm_id, uniq_id($pdo, 'member'));
+    }
+
+    try {
+        // Fill in band info
+        // Insert data
+        $stmt = $pdo->prepare("INSERT INTO `band` (`Band_id`, `Naam`, `Genre`, `Herkomst`, `Omschrijving`) VALUES (:id, :name, :genre, :origin, :desc)");
+        $stmt->bindParam(':id', $band_id);
+        $stmt->bindParam(':name', $band_name);
+        $stmt->bindParam(':genre', $genre);
+        $stmt->bindParam(':origin', $origin);
+        $stmt->bindParam(':desc', $desc);
+        $stmt->execute();
+
+        // Close query
+        $stmt->closeCursor();
+        unset($stmt);
+
+        // Fill in band member info
+        // Insert data
+        foreach ($bandm_id as $i => $member) {
+            $stmt = $pdo->prepare("INSERT INTO `bandleden` (`Lid_id`, `Band_id`, `Naam`, `Email`, `Telefoon`) VALUES (:id, :band_id, :name, :email, :phone)");
+            $stmt->bindParam(':id', $bandm_id[$i]);
+            $stmt->bindParam(':band_id', $band_id);
+            $stmt->bindParam(':name', $bandm_name[$i]);
+            $stmt->bindParam(':email', $bandm_email[$i]);
+            $stmt->bindParam(':phone', $bandm_phone[$i]);
+            $stmt->execute();
+
+            // Close query
+            $stmt->closeCursor();
+            unset($stmt);
+        }
+
+        // For some reason the query that adds members also adds one empty member
+        // This will remove that empty member
+        $stmt = $pdo->prepare("DELETE FROM `bandleden` WHERE `Naam` IS NULL");
+        // And of course close the query :)
+        $stmt->execute();
+        $stmt->closeCursor();
+        unset($stmt);
+    } catch (Exeption $e) {
+        echo "Error!: <br>" . $e->getMessage();
+    }
+
+    setcookie('added_band', $user_id, time() + 3, "/");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 ?>

@@ -22,11 +22,14 @@ textarea {
     vertical-align: middle;
 }
 
+.menu_content {
+    display: none;
+}
 .menu_content ul {
     list-style-type: none;
 }
 
-.item_title {
+.item_title, .band_member_name {
     margin: 0;
     padding: 0;
     user-select: none;
@@ -49,7 +52,12 @@ textarea {
 .open_menu_member_img {
     width: 20px
 }
-.band_member_name {
-    margin-top: 0;
-    height: 0;
+
+#people div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-gap: 5px;
+}
+#people div p {
+    margin: 0;
 }

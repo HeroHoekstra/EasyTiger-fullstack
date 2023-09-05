@@ -57,31 +57,32 @@ function add_person() {
 
     var name_label = document.createTextNode('Name: ');
     var name_input = document.createElement('input');
+    name_input.name = `band_name_${name_arr.length}`; 
     name_input.type = 'text';
     name_input.className = 'person_name';
 
     var email_label = document.createTextNode('Email: ');
     var email_input = document.createElement('input');
+    email_input.name = `band_email_${name_arr.length}`;
     email_input.type = 'email';
 
     var phone_number_label = document.createTextNode('Phone number: ');
     var phone_number_input = document.createElement('input');
+    phone_number_input.name = `band_phone_${name_arr.length}`;
     phone_number_input.type = 'text';
 
     // Append elements
     new_div.appendChild(name_header);
+    new_div.appendChild(document.createElement('p'));
     new_div.appendChild(name_label);
     new_div.appendChild(name_input);
-    new_div.appendChild(document.createElement('br'));
     new_div.appendChild(email_label);
     new_div.appendChild(email_input);
-    new_div.appendChild(document.createElement('br'));
     new_div.appendChild(phone_number_label);
     new_div.appendChild(phone_number_input);
-    new_div.appendChild(document.createElement('br'));
 
     // Append the new div to the parent div and add it to the array
-    name_arr.push(name_input)
+    name_arr.push(name_input);
     parent.appendChild(new_div);
 }
 

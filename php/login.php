@@ -99,7 +99,7 @@ try {
         $stmt->bindParam(':is_admin', 0);
         $stmt->execute();
 
-        $lastInsertId = $pdo->lastInsertId(); // Retrieve the last inserted ID
+        $lastInsertId = $pdo->lastInsertId();
 
         $stmt->closeCursor();
         unset($stmt);
@@ -111,6 +111,6 @@ try {
         echo "Something unexpected happend";
     }
 } catch (Exception $e) {
-    echo "Error!: <br>" . $e->gerMessage();
+    echo "Error!: <br>" . $e->getMessage();
 }
 ?>

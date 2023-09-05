@@ -29,8 +29,9 @@
                 <h1 class="open_menu_text">Create a new band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
             </label>
 
+            <!-- Add band menu -->
             <div class="menu_content menu_openable">
-                <form action="#" method="post">
+                <form action="response.php" method="post" id="myForm">
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
@@ -74,7 +75,9 @@
                             </ul>
                         </li>
 
-                        <input type="submit" value="Create Band" role="button" aria-label="Add band to database">
+                        <br>
+
+                        <input type="submit" name="add_band" value="Create Band" role="button" aria-label="Add band to database">
                     </ul>
                 </form>
             </div>
