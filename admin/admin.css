@@ -22,13 +22,11 @@ textarea {
     vertical-align: middle;
 }
 
-.menu_content {
-    display: none;
-}
 .menu_content ul {
     list-style-type: none;
 }
 
+/* Add band menu */
 .item_title, .band_member_name {
     margin: 0;
     padding: 0;
@@ -53,11 +51,47 @@ textarea {
     width: 20px
 }
 
-#people div {
+.people div {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-gap: 5px;
 }
-#people div p {
+.people div p {
     margin: 0;
+}
+
+/* Edit band menu */
+#bands {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.edit_band_band {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: repeat(4, 16px);
+    grid-template-areas: "0 edit" "1 edit" "2 edit" "3 edit";
+    grid-column-gap: 5px;
+
+    margin: 5px;
+    padding: 5px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.edit_band_band p {
+    margin: 0;
+}
+.edit {
+    padding: 100% 0;
+    line-height: 0;
+
+    grid-area: edit;
+    text-align: center;
+    font-size: smaller;
+
+    cursor: pointer;
+    color: rgb(52, 83, 118)
+}
+.band_attributes {
+    padding-left: 20px;
+    font-size: small;
 }

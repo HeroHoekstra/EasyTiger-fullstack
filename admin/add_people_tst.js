@@ -13,40 +13,15 @@ for (let i = 0; i < buttons.length; i++) {
     });
 }
 
+// Open add / edit people menu
+// There should be an equal number of people tabs and open buttons
+const open_people_menu = document.querySelectorAll('.open_band_member_menu');
+const people_menu = document.querySelectorAll('.people');
+const button_img = document.querySelectorAll('.open_menu_member_img');
+for (let i = 0; i < open_people_menu.length; i++) {
+    open_people_menu[i].addEventListener('click', () => {
 
-// Smaller add
-let add_buttons = new Array(0);
-add_buttons.push(document.querySelectorAll('.add_item'));
-add_buttons.push(document.querySelectorAll('.remove_item'));
-
-for (let i = 0; i < add_buttons.length; i++) {
-    for (let j = 0; j < add_buttons[i].length; j++) {
-        add_buttons[i][j].addEventListener('click', () => {
-            switch(add_buttons[i][j].id) {
-                case "add_people":
-                case "add_people_edit":
-                    if (add_buttons[i][j].id === "add_people") {
-                        add_person(document.getElementById('add_people'));
-                        open_menu(document.getElementById('people'))
-                    } else {
-                        add_person(document.getElementById('add_people_edit'));
-                        open_menu(document.getElementById('people_edit'));
-                    }
-
-                    name_arr.forEach((element, index) => element.addEventListener('input', () => {
-                        change_name(element, index);
-                    }));
-                    break;
-                case "remove_people":
-                    remove_person();
-                    open_menu(document.getElementById('people'));
-                    break;
-                default:
-                    console.log("No button like this exists");
-                    break;
-            }
-        });
-    }
+    });
 }
 
 let name_arr = new Array(0)
@@ -92,17 +67,10 @@ function add_person(parent) {
     parent.appendChild(new_div);
 }
 
-function remove_person() {
-    const to_be_removed = document.getElementById(`person_${name_arr.length - 1}`);
-    to_be_removed.parentElement.removeChild(to_be_removed);
-
-    name_arr.pop();
-}
-
-function open_menu(form) {
-    document.querySelector('.open_menu_member_img').style.rotate = '90deg';
-    document.getElementById('open_band_member_menu').checked = true;
-    form.style.display = 'grid';
+// Open add / edit people menu
+function open_add_menu(button, menu, img) {
+    img.style.rotate = '90deg';
+    
 }
 
 // Change title of persons
