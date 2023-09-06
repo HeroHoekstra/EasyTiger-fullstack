@@ -32,6 +32,10 @@ textarea {
     padding: 0;
     user-select: none;
 }
+.band_member_name {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
 
 .add_people {
     display: flex;

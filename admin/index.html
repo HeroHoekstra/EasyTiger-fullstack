@@ -54,7 +54,7 @@
                                 <label for="remove_people" role="button" aria-label="Remove a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
                                 </label>
-                                <input type="checkbox" id="open_band_member_menu" class="open_menu_button">
+                                <input type="checkbox" id="open_band_member_menu" class="open_menu_button open_band_member_menu">
                                 <label for="open_band_member_menu" role="button" aria-label="Open create band menu" tabindex="0">
                                     <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
                                 </label>
@@ -85,7 +85,7 @@
                     <h3>Select band:</h3>
                     <small id="found_display"></small>
                     <br>
-                    <input type="text" id="search">
+                    <input type="text" id="search" role="textbox" aria-label="Search band by name" tabindex="0" autocomplete="off">
 
                     <div id="bands">
                         <div class="edit_band_band">
@@ -127,8 +127,8 @@
                         <li>
                             <div class="add_people">
                                 <h3 class="item_title">Add person to band list</h3>
-                                <input type="checkbox" id="add_people" class="add_item">
-                                <label for="add_people" role="button" aria-label="Add a person to band list" tabindex="0">
+                                <input type="checkbox" id="add_people_edit" class="add_item">
+                                <label for="add_people_edit" role="button" aria-label="Add a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
                                 </label>
                                 <input type="checkbox" id="remove_people" class="remove_item">
@@ -185,7 +185,7 @@
         found_display.innerText = `Found ${amount} band(s) that matchs the search result`;
     </script>
 
-    <script src="add people_tst.js"></script>
+    <script src="add_people.js"></script>
     <script src="../js/a11y.js"></script>
 </body>
 </html>
