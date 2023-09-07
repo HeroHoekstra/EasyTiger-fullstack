@@ -42,6 +42,7 @@ for (let i = 0; i < add_people.length; i++) {
     });
 }
 
+// Create added person
 function add_person(parent, arr) {
     // Create a new div element
     var new_div = document.createElement('div');
@@ -103,3 +104,43 @@ function change_name(e, i) {
         title[i].innerText = e.value.slice(0, window.innerWidth / 50) + "...";
     }
 }
+
+// Search bands
+const search = document.querySelectorAll('.search');
+const found_display = document.querySelectorAll('.found_display');
+
+let bands = [new Array(0), new Array(0)];
+bands[0] = Array.from(document.querySelectorAll('#band_edit .edit_band_band'));
+bands[1] = Array.from(document.querySelectorAll('#band_add .edit_band_band'));
+
+let band_titles = [new Array(0), new Array(0)];
+band_titles[0] = Array.from(document.querySelectorAll('#band_edit .edit_band_band .band_title'));
+band_titles[1] = Array.from(document.querySelectorAll('#band_add .edit_band_band .band_title'));
+
+let amount = 0;
+
+for (let j = 0; j < search.length; j++) {
+    search[j].addEventListener('input', () => {
+        amount = 0;
+        for (let i = 0; i < band_titles[j].length; i++) {
+            band_name_lower = band_titles[j][i].dataset.name.toLowerCase();
+            search_value_lower = search[j].value.toLowerCase();
+
+            if (band_name_lower.includes(search_value_lower)) {
+                amount++;
+                bands[j][i].style.display = 'grid';
+            } else {
+                bands[j][i].style.display = 'none';
+            }
+        }
+    
+        found_display[j].innerText = `Found ${amount} band(s) that matchs the search result`;
+        if (search.value === "") {
+            found_display[j].innerText  =`Showing all bands`;
+        }
+    });
+    
+    found_display[j].innerText = `Found ${amount} band(s) that match the search result`;
+}
+
+// 

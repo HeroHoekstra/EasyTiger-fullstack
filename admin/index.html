@@ -15,7 +15,7 @@
         <!-- Add band menu -->
         <div class="add_band">
             <input type="checkbox" id="open_band_menu" class="open_menu_button">
-            <label for="open_band_menu" role="button" aria-label="Open create band menu" tabindex="0">
+            <label for="open_band_menu" aria-label="Open create band menu" tabindex="0">
                 <h1 class="open_menu_text">Create a new band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
             </label>
 
@@ -24,22 +24,19 @@
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
-                            <input type="text" name="band_name" role="textbox" aria-label="Textbox for the bands name" tabindex="0" maxlength="250" required>
+                            <input type="text" name="band_name" aria-label="Textbox for the bands name" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Genre:</h3>
-                            <input type="text" name="genre" role="textbox" aria-label="Textbox for band genre" tabindex="0" maxlength="250" required>
+                            <input type="text" name="genre" aria-label="Textbox for band genre" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Origin:</h3>
-                            <input type="text" name="origin" role="textbox" aria-label="Textbox for band origin" tabindex="0" maxlength="250" required>
+                            <input type="text" name="origin" aria-label="Textbox for band origin" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Description:</h3>
-                            <textarea role="textbox" name="desc" role="textbox" aria-label="Bigger textbox for band discription" tabindex="0" maxlength="65535" required></textarea>
+                            <textarea  name="desc" aria-label="Bigger textbox for band discription" tabindex="0" maxlength="65535" required></textarea>
                         </li>
                         <br>
 
@@ -47,15 +44,15 @@
                             <div class="add_people">
                                 <h3 class="item_title">Add person to band list</h3>
                                 <input type="checkbox" id="add_people" class="add_item">
-                                <label for="add_people" role="button" aria-label="Add a person to band list" tabindex="0">
+                                <label for="add_people" aria-label="Add a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
                                 </label>
                                 <input type="checkbox" id="remove_people" class="remove_item">
-                                <label for="remove_people" role="button" aria-label="Remove a person to band list" tabindex="0">
+                                <label for="remove_people" aria-label="Remove a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
                                 </label>
                                 <input type="checkbox" id="open_band_member_menu" class="open_menu_button open_band_member_menu">
-                                <label for="open_band_member_menu" role="button" aria-label="Open create band menu" tabindex="0">
+                                <label for="open_band_member_menu" aria-label="Open create band menu" tabindex="0">
                                     <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
                                 </label>
                             </div>
@@ -66,16 +63,17 @@
 
                         <br>
 
-                        <input type="submit" name="add_band" value="Create Band" role="button" aria-label="Add band to database">
+                        <input type="submit" name="add_band" value="Create Band" aria-label="Add band to database">
                     </ul>
                 </form>
             </div>
         </div>
 
         <!-- Edit band menu -->
+        <!-- Still need php and a bit more css -->
         <div class="edit_band">
             <input type="checkbox" id="open_edit_band_menu" class="open_menu_button">
-            <label for="open_edit_band_menu" role="button" aria-label="Open edit band menu" tabindex="0">
+            <label for="open_edit_band_menu" aria-label="Open edit band menu" tabindex="0">
                 <h1 class="open_menu_text">Edit existing band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
             </label>
 
@@ -83,44 +81,61 @@
                 <!-- Select band -->
                 <ul>
                     <h3>Select band:</h3>
-                    <small id="found_display"></small>
+                    <small class="found_display"></small>
                     <br>
-                    <input type="text" id="search" role="textbox" aria-label="Search band by name" tabindex="0" autocomplete="off">
-
-                    <div id="bands">
-                        <div class="edit_band_band">
-                            <p class="band_title"><b>Cool band yo</b></p>
-                            <ul class="band_attributes">
-                                <li>Genre</li>
-                                <li>Origin</li>
-                                <li>3 band members</li>
-                            </ul>
-                            <p class="edit">[edit]</p>
-                        </div>
-                    </div>
+                    <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
                 </ul>
+
+                <div id="band_edit">
+                    <div class="edit_band_band">
+                        <p class="band_title" data-name="Cool band yo"><b>Cool band yo</b></p>
+                        <ul class="band_attributes">
+                            <li>Genre</li>
+                            <li>Origin</li>
+                            <li>3 band members</li>
+                        </ul>
+                        <p class="edit">[edit]</p>
+                    </div>
+
+                    <div class="edit_band_band">
+                        <p class="band_title" data-name="The crime"><b>The crime</b></p>
+                        <ul class="band_attributes">
+                            <li>Genre</li>
+                            <li>Origin</li>
+                            <li>5 band members</li>
+                        </ul>
+                        <p class="edit">[edit]</p>
+                    </div>
+
+                    <div class="edit_band_band">
+                        <p class="band_title" data-name="Cool band yo"><b>Cool band y...</b></p>
+                        <ul class="band_attributes">
+                            <li>Genre</li>
+                            <li>Origin</li>
+                            <li>3 band members</li>
+                        </ul>
+                        <p class="edit">[edit]</p>
+                    </div>
+                </div>
 
                 <!-- Edit band -->
                 <form action="#" method="post">
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
-                            <input type="text" value="Band name" name="band_name" role="textbox" aria-label="Textbox for the bands name" tabindex="0" maxlength="250" required>
+                            <input type="text" value="Band name" name="band_name" aria-label="Textbox for the bands name" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Genre:</h3>
-                            <input type="text" value="Genre" name="genre" role="textbox" aria-label="Textbox for band genre" tabindex="0" maxlength="250" required>
+                            <input type="text" value="Genre" name="genre" aria-label="Textbox for band genre" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Origin:</h3>
-                            <input type="text" value="Origin" name="origin" role="textbox" aria-label="Textbox for band origin" tabindex="0" maxlength="250" required>
+                            <input type="text" value="Origin" name="origin" aria-label="Textbox for band origin" tabindex="0" maxlength="250" required>
                         </li>
-                        <br>
                         <li>
                             <h3 class="item_title">Description:</h3>
-                            <textarea role="textbox" Value="Desc" name="desc" role="textbox" aria-label="Bigger textbox for band discription" tabindex="0" maxlength="65535" required></textarea>
+                            <textarea Value="Desc" name="desc" aria-label="Bigger textbox for band discription" tabindex="0" maxlength="65535" required></textarea>
                         </li>
                         <br>
 
@@ -128,15 +143,15 @@
                             <div class="add_people">
                                 <h3 class="item_title">Add person to band list</h3>
                                 <input type="checkbox" id="add_people_edit" class="add_item">
-                                <label for="add_people_edit" role="button" aria-label="Add a person to band list" tabindex="0">
+                                <label for="add_people_edit" aria-label="Add a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
                                 </label>
                                 <input type="checkbox" id="remove_people" class="remove_item">
-                                <label for="remove_people" role="button" aria-label="Remove a person to band list" tabindex="0">
+                                <label for="remove_people" aria-label="Remove a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
                                 </label>
                                 <input type="checkbox" id="open_band_member_menu_edit" class="open_menu_button open_band_member_menu">
-                                <label for="open_band_member_menu_edit" role="button" aria-label="Open create band menu" tabindex="0">
+                                <label for="open_band_member_menu_edit" aria-label="Open create band menu" tabindex="0">
                                     <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
                                 </label>
                             </div>
@@ -147,43 +162,82 @@
 
                         <br>
 
-                        <input type="submit" name="add_band" value="Create Band" role="button" aria-label="Add band to database">
+                        <input type="submit" name="add_band" value="Create Band" aria-label="Add band to database">
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <div class="add_event">
+            <input type="checkbox" id="open_add_event_menu" class="open_menu_button">
+            <label for="open_add_event_menu" aria-label="Open create new event menu" tabindex="0">
+                <h1 class="open_menu_text">Add event <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
+            </label>
+
+            <div class="menu_content menu_openable">
+                <form action="#" method="post">
+                    <ul>
+                        <li>
+                            <h3 class="item_title">Event name:</h3>
+                            <input type="text" aria-label="Input field for the event name" tabindex="0" required>
+                        </li>
+                        <li>
+                            <h3 class="item_title">Price:</h3>
+                            <input type="number" aria-label="Input field for the event'script price" tabindex="0" step="0.01" required>
+                        </li>
+                        <li>
+                            <h3 class="item_title">Date:</h3>
+                            <input type="date" aria-label="Input field for the event date" tabindex="0" required>
+                        </li>
+                        <li>
+                            <h3 class="item_title">Start time:</h3>
+                            <input type="time" aria-label="Input field for the event's start time" tabindex="0" required>
+                        </li>
+                        <li>
+                            <ul>
+                                <h3>Select band:</h3>
+                                <small class="found_display"></small>
+                                <br>
+                                <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                            </ul>
+
+                            <div id="band_add">
+                                <div class="edit_band_band">
+                                    <p class="band_title" data-name="Fart"><b>Fart</b></p>
+                                    <ul class="band_attributes">
+                                        <li>Genre</li>
+                                        <li>Origin</li>
+                                        <li>3 band members</li>
+                                    </ul>
+                                    <p class="add edit">[add]</p>
+                                </div>
+            
+                                <div class="edit_band_band">
+                                    <p class="band_title" data-name="Tits"><b>Tits</b></p>
+                                    <ul class="band_attributes">
+                                        <li>Genre</li>
+                                        <li>Origin</li>
+                                        <li>5 band members</li>
+                                    </ul>
+                                    <p class="add edit">[add]</p>
+                                </div>
+            
+                                <div class="edit_band_band">
+                                    <p class="band_title" data-name="Balls"><b>Balls</b></p>
+                                    <ul class="band_attributes">
+                                        <li>Genre</li>
+                                        <li>Origin</li>
+                                        <li>3 band members</li>
+                                    </ul>
+                                    <p class="add edit">[add]</p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </form>
             </div>
         </div>
     </main>
-
-    <script>
-        const search = document.getElementById('search');
-        const band_titles = document.querySelectorAll('#bands div .band_title');
-        const bands = document.querySelectorAll('#bands div');
-        const found_display = document.getElementById('found_display');
-
-        let amount = 0;
-
-        search.addEventListener('input', () => {
-            amount = 0;
-            for (let i = 0; i < band_titles.length; i++) {
-                band_name_lower = band_titles[i].innerText.toLowerCase();
-                search_value_lower = search.value.toLowerCase();
-
-                if (band_name_lower.includes(search_value_lower)) {
-                    amount++;
-                    bands[i].style.display = 'grid';
-                } else {
-                    bands[i].style.display = 'none';
-                }
-            }
-
-            found_display.innerText = `Found ${amount} band(s) that matchs the search result`;
-            if (search.value === "") {
-                found_display.innerText  =`Showing all bands`;
-            }
-        });
-
-        found_display.innerText = `Found ${amount} band(s) that matchs the search result`;
-    </script>
 
     <script src="add_people.js"></script>
     <script src="../js/a11y.js"></script>
