@@ -73,27 +73,34 @@ textarea {
 #band_edit, #band_add {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
     width: 350px;
+    max-height: 450px;
+    overflow-y: scroll;
+
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.edit_band_band {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    grid-template-rows: repeat(4, 16px);
-    grid-template-areas: "0 edit" "1 edit" "2 edit" "3 edit";
-    grid-column-gap: 5px;
+.edit_band_band, .add_band_band {
+    position: relative;
 
     margin: 5px;
     padding: 5px;
 
+    width: 43%;
+
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.edit_band_band p {
+.edit_band_band p, .add_band_band p {
     margin: 0;
 }
 .edit {
-    padding: 100% 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    padding: 5px 0;
     line-height: 0;
 
     grid-area: edit;
@@ -104,7 +111,7 @@ textarea {
     color: rgb(52, 83, 118)
 }
 .band_attributes {
-    padding-left: 20px;
+    padding-left: 10px;
     margin: 0;
     font-size: small;
 }

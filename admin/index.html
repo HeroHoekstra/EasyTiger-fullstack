@@ -63,7 +63,7 @@
 
                         <br>
 
-                        <input type="submit" name="add_band" value="Create Band" aria-label="Add band to database">
+                        <input type="submit" name="add_band" value="Create band" aria-label="Add band to database">
                     </ul>
                 </form>
             </div>
@@ -175,23 +175,23 @@
             </label>
 
             <div class="menu_content menu_openable">
-                <form action="#" method="post">
+                <form action="response.php" method="post">
                     <ul>
                         <li>
                             <h3 class="item_title">Event name:</h3>
-                            <input type="text" aria-label="Input field for the event name" tabindex="0" required>
+                            <input type="text" name="event_name" aria-label="Input field for the event name" tabindex="0" required>
                         </li>
                         <li>
                             <h3 class="item_title">Price:</h3>
-                            <input type="number" aria-label="Input field for the event'script price" tabindex="0" step="0.01" required>
+                            <input type="number" name="price" aria-label="Input field for the event'script price" tabindex="0" step="0.01" required>
                         </li>
                         <li>
                             <h3 class="item_title">Date:</h3>
-                            <input type="date" aria-label="Input field for the event date" tabindex="0" required>
+                            <input type="date" name="date" aria-label="Input field for the event date" tabindex="0" required>
                         </li>
                         <li>
                             <h3 class="item_title">Start time:</h3>
-                            <input type="time" aria-label="Input field for the event's start time" tabindex="0" required>
+                            <input type="time" name="start_time" aria-label="Input field for the event's start time" tabindex="0" required>
                         </li>
                         <li>
                             <ul>
@@ -202,38 +202,45 @@
                             </ul>
 
                             <div id="band_add">
-                                <div class="edit_band_band">
+                                <div class="add_band_band" data-band_id="3">
                                     <p class="band_title" data-name="Fart"><b>Fart</b></p>
                                     <ul class="band_attributes">
                                         <li>Genre</li>
                                         <li>Origin</li>
                                         <li>3 band members</li>
                                     </ul>
-                                    <p class="add edit">[add]</p>
+                                    <p class="add edit">[Add]</p>
                                 </div>
             
-                                <div class="edit_band_band">
-                                    <p class="band_title" data-name="Tits"><b>Tits</b></p>
+                                <div class="add_band_band">
+                                    <p class="band_title" data-name="Tits" data-band_id="2"><b>Tits</b></p>
                                     <ul class="band_attributes">
                                         <li>Genre</li>
                                         <li>Origin</li>
                                         <li>5 band members</li>
                                     </ul>
-                                    <p class="add edit">[add]</p>
+                                    <p class="add edit">[Add]</p>
                                 </div>
             
-                                <div class="edit_band_band">
-                                    <p class="band_title" data-name="Balls"><b>Balls</b></p>
+                                <div class="add_band_band">
+                                    <p class="band_title" data-name="Balls" data-band_id="1"><b>Balls</b></p>
                                     <ul class="band_attributes">
                                         <li>Genre</li>
                                         <li>Origin</li>
                                         <li>3 band members</li>
                                     </ul>
-                                    <p class="add edit">[add]</p>
+                                    <p class="add edit">[Add]</p>
                                 </div>
                             </div>
                         </li>
+                        <li>
+                            <div id="added_bands">
+
+                            </div>
+                        </li>
                     </ul>
+
+                    <input type="submit" name="add_event" value="Add event" aria-label="Submit the event to the database">
                 </form>
             </div>
         </div>
