@@ -88,7 +88,7 @@ if (isset($_POST['add_band'])) {
         $stmt->execute();
         $stmt->closeCursor();
         unset($stmt);
-    } catch (Exeption $e) {
+    } catch (Exception $e) {
         echo "Error!: <br>" . $e->getMessage();
     }
 

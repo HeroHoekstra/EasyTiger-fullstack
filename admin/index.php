@@ -1,3 +1,16 @@
+<?php
+ob_start();
+
+require('to_json.php');
+
+session_start();
+$bands = $_SESSION['bands'];
+
+ob_end_clean();
+
+header('Content-Type: text/html');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,39 +100,25 @@
                 </ul>
 
                 <div id="band_edit">
-                    <div class="edit_band_band">
-                        <p class="band_title" data-name="Cool band yo"><b>Cool band yo</b></p>
-                        <ul class="band_attributes">
-                            <li>Genre</li>
-                            <li>Origin</li>
-                            <li>3 band members</li>
-                        </ul>
-                        <p class="edit">[edit]</p>
-                    </div>
-
-                    <div class="edit_band_band">
-                        <p class="band_title" data-name="The crime"><b>The crime</b></p>
-                        <ul class="band_attributes">
-                            <li>Genre</li>
-                            <li>Origin</li>
-                            <li>5 band members</li>
-                        </ul>
-                        <p class="edit">[edit]</p>
-                    </div>
-
-                    <div class="edit_band_band">
-                        <p class="band_title" data-name="Cool band yo"><b>Cool band y...</b></p>
-                        <ul class="band_attributes">
-                            <li>Genre</li>
-                            <li>Origin</li>
-                            <li>3 band members</li>
-                        </ul>
-                        <p class="edit">[edit]</p>
-                    </div>
+                    <?php
+                    foreach ($bands as $band) {
+                        echo "
+                        <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
+                            <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
+                            <ul class=\"band_attributes\">
+                                <li>Genre: " . $band['Genre'] . "</li>
+                                <li>Origin: " . $band['Herkomst'] . "</li>
+                                <li>" . count($band['members']) . " band members</li>
+                            </ul>
+                            <p class=\"edit\">[Edit]</p>
+                        </div>
+                        ";
+                    }
+                    ?>
                 </div>
 
                 <!-- Edit band -->
-                <form action="#" method="post">
+                <form action="#" method="post" id="edit_band_members">
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
@@ -162,7 +161,7 @@
 
                         <br>
 
-                        <input type="submit" name="add_band" value="Create Band" aria-label="Add band to database">
+                        <input type="submit" name="add_band" value="Edit Band" aria-label="Add band to database">
                     </ul>
                 </form>
             </div>
@@ -244,6 +243,19 @@
                 </form>
             </div>
         </div>
+
+        <!--<div class="edit_event">
+            <input type="checkbox" id="open_edit_event" class="open_menu_button">
+            <label for="open_edit_event" aria-label="Open create edit event menu" tabindex="0">
+                <h1 class="open_menu_text">Create a new band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
+            </label>
+
+            <div class="menu_content menu_openable">
+                <form action="#" method="post">
+
+                </form>
+            </div>
+        </div>-->
     </main>
 
     <script src="add_people.js"></script>

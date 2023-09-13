@@ -36,11 +36,16 @@ for (let i = 0; i < add_people.length; i++) {
         }));
     });
 
-    remove_people[i].addEventListener('click', () => {
-        people_menu[i].removeChild(name_arr[i][name_arr[i].length - 1]);
-        name_arr[i].pop();
-    });
+    /*remove_people[i].addEventListener('click', () => {
+        if (name_arr[i].length > 0) {
+            name_arr[i][name_arr[i].length - 1].parentNode.remove();
+            name_arr[i].pop();
+        }
+    });*/
 }
+remove_people[1].addEventListener('click', () => {
+    
+});
 
 // Create added person
 function add_person(parent, arr) {
@@ -106,6 +111,53 @@ function change_name(e, i) {
 }
 
 // Search bands
+// Make AJAX request for bands
+let data;
+const xhr = new XMLHttpRequest();
+xhr.open('GET', './to_json.php', true);
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            data = JSON.parse(xhr.responseText);
+
+            // Make correct edit screen appear
+            const edit_button = document.querySelectorAll('.edit');
+            for (let i = 0; i <  edit_button.length; i++) {
+                for (let j = 0; j < data.length; j++) {
+                    if (data[j].Band_id === edit_button[i].parentNode.dataset.band_id) {
+                        edit_button[i].addEventListener('click', () => {
+                            const edit_screen = document.getElementById('edit_band_members');
+                            edit_screen.querySelector('input[name=\'band_name\']').value = data[j].Naam;
+                            edit_screen.querySelector('input[name=\'genre\']').value = data[j].Genre;
+                            edit_screen.querySelector('input[name=\'origin\']').value = data[j].Herkomst;
+                            edit_screen.querySelector('textarea[name=\'desc\']').value = data[j].Omschrijving;
+
+                            const previously_added = edit_screen.querySelectorAll('li > .people > div');
+                            for (let k = 0; k < previously_added.length; k++) {
+                                previously_added[k].parentNode.removeChild(previously_added[k]);
+                            }
+
+                            for (let k = 0; k < data[j].members.length; k++) {
+                                add_person(people_menu[1], 1);
+
+                                const newly_added = edit_screen.querySelector(`li > .people > div[id='person_${k}']`);
+
+                                newly_added.querySelector('.band_member_name').innerText = data[j].members[k].Naam;
+                                newly_added.querySelector(`input[name='band_name_${k}']`).value = data[j].members[k].Naam;
+                                newly_added.querySelector(`input[name='band_email_${k}']`).value = data[j].members[k].Email;
+                                newly_added.querySelector(`input[name='band_phone_${k}']`).value = data[j].members[k].Telefoon;
+                            }
+                        });
+                    }
+                }
+            }
+        } else {
+            console.log('Error:', xhr.statusText);
+        }
+    }
+};
+xhr.send();
+
 const search = document.querySelectorAll('.search');
 const found_display = document.querySelectorAll('.found_display');
 
