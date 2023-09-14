@@ -94,14 +94,10 @@ if (isset($_POST['add_band'])) {
 
     setcookie('added_band', $user_id, time() + 3, "/");
     header('Location: ' . $_SERVER['HTTP_REFERER']);
-} else if (isset($_POST['add_event'])){
-    // Get event info
-    $event_name = $_POST['event_name'];
-    $price = $_POST['price'];
-    $date = $_POST['date'];
-    $start_time = $_POST['start_time'];
-
-    // Get band info
-    print_r($_POST);
 }
+
+// When the user finds this page
+echo "Uhhmmm... You shouldn't be here...";
+setcookie('bad', '>:(', time() + 3, "/");
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

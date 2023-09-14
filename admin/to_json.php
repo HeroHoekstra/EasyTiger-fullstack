@@ -1,4 +1,7 @@
 <?php
+// For some reason this script doesn't work when put in the php folder
+// So that's why it isn't in there
+
 // Get data
 include "../php/connect.php";
 

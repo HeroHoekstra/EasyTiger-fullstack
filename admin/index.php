@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-require('to_json.php');
+require('./to_json.php');
 
 session_start();
 $bands = $_SESSION['bands'];
@@ -60,8 +60,8 @@ header('Content-Type: text/html');
                                 <label for="add_people" aria-label="Add a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
                                 </label>
-                                <input type="checkbox" id="remove_people" class="remove_item">
-                                <label for="remove_people" aria-label="Remove a person to band list" tabindex="0">
+                                <input type="checkbox" id="remove_people_0" class="remove_item">
+                                <label for="remove_people_0" aria-label="Remove a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
                                 </label>
                                 <input type="checkbox" id="open_band_member_menu" class="open_menu_button open_band_member_menu">
@@ -118,7 +118,7 @@ header('Content-Type: text/html');
                 </div>
 
                 <!-- Edit band -->
-                <form action="#" method="post" id="edit_band_members">
+                <form action="./php/edit_band.php" method="post" id="edit_band_members">
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
@@ -145,8 +145,8 @@ header('Content-Type: text/html');
                                 <label for="add_people_edit" aria-label="Add a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/plus-circle.svg" alt="add button">
                                 </label>
-                                <input type="checkbox" id="remove_people" class="remove_item">
-                                <label for="remove_people" aria-label="Remove a person to band list" tabindex="0">
+                                <input type="checkbox" id="remove_people_1" class="remove_item">
+                                <label for="remove_people_1" aria-label="Remove a person to band list" tabindex="0">
                                     <img src="../assets/svg/misc/dash-circle.svg" alt="remove button">
                                 </label>
                                 <input type="checkbox" id="open_band_member_menu_edit" class="open_menu_button open_band_member_menu">
@@ -157,11 +157,13 @@ header('Content-Type: text/html');
                             <ul class="people menu_openable">
 
                             </ul>
+                            <input type="hidden" name="band_id" id="edit_band_id">
                         </li>
 
                         <br>
 
-                        <input type="submit" name="add_band" value="Edit Band" aria-label="Add band to database">
+                        <input type="submit" name="edit_band" value="Edit Band" aria-label="Add band to database">
+                        <p class="cancel_edit">[Cancel]</p>
                     </ul>
                 </form>
             </div>
@@ -258,7 +260,12 @@ header('Content-Type: text/html');
         </div>-->
     </main>
 
-    <script src="add_people.js"></script>
+    <!-- main.js does misc stuff -->
+    <script src="./js/main.js"></script>
+    <!-- get_band.js and change_values.js provide values to main.js -->
+    <script src="./js/get_bands.js"></script>
+    <script src="./js/change_values.js"></script>
+    <!-- Script for accessibility -->
     <script src="../js/a11y.js"></script>
 </body>
 </html>
