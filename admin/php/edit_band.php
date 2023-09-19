@@ -119,7 +119,7 @@ if (isset($_POST['edit_band'])) {
     } catch (Exception $e) {
         echo "Error!: " . $e->getMessage();
 
-        setcookie('err', 'Failed to update band, try again later', time() + 3, "/");
+        setcookie('err', 'Failed to update band', time() + 3, "/");
     }
 }
 

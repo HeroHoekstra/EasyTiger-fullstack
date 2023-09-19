@@ -1,5 +1,5 @@
 <?php
-include '../php/connect.php';
+include '../../php/connect.php';
 
 function uniq_id($pdo, $needed_id) {
     $uniq_id = hexdec(uniqid());
@@ -93,7 +93,7 @@ if (isset($_POST['add_band'])) {
     } catch (Exception $e) {
         echo "Error!: <br>" . $e->getMessage();
 
-        setcookie('err', 'Failed adding band, try again later', time() + 3, "/");
+        setcookie('err', 'Failed adding band', time() + 3, "/");
     }
 }
 

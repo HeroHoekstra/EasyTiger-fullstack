@@ -31,6 +31,7 @@ xhr.onreadystatechange = function () {
                             edit_screen.querySelector('input[name=\'origin\']').value = data[j].Herkomst;
                             edit_screen.querySelector('textarea[name=\'desc\']').value = data[j].Omschrijving;
 
+                            // Loop through members and show them
                             for (let k = 0; k < data[j].members.length; k++) {
                                 add_person(edit_screen.querySelector('.people'), 1);
 
@@ -48,6 +49,7 @@ xhr.onreadystatechange = function () {
                                 newly_added.querySelector(`input[name='band_phone_${k}']`).value = data[j].members[k].Telefoon;
                             }
 
+                            // Remove button
                             const remove_amount = edit_screen.querySelectorAll('.people > div').length - data[j].members.length;
                             for (let k = 0; k < remove_amount; k++) {
                                 if (name_arr[1].length > 0) {

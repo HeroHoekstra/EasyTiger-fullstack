@@ -1,0 +1,59 @@
+/* Big main menu buttons */
+.open_menu_button {
+    display: none;
+}
+.open_menu_text {
+    margin: 0;
+    user-select: none;
+    cursor: pointer;
+}
+.open_menu_img {
+    width: 27px;
+    vertical-align: middle;
+}
+
+/* Add people / remove people*/
+.add_people label {
+    cursor: pointer;
+}
+.add_people input {
+    display: none;
+}
+.add_people img {
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Canceling and removing people / events / bands */
+.edit, .cancel_edit {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    padding: 5px 0;
+    line-height: 0;
+
+    grid-area: edit;
+    text-align: center;
+    font-size: smaller;
+
+    cursor: pointer;
+    color: rgb(52, 83, 118)
+}
+
+.cancel_edit {
+    top: auto;
+    bottom: 0;
+    left: 75px;
+
+    padding: 0;
+}
+
+.remove_person {
+    justify-self: right;
+
+    font-size: smaller;
+
+    cursor: pointer;
+    color: rgb(52, 83, 118)
+}

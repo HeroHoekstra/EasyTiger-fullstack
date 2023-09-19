@@ -43,6 +43,20 @@ function add_person(parent, arr) {
     let new_div = document.createElement('div');
     new_div.id = `person_${name_arr[arr].length}`;
 
+    // Create remove button
+    let remove = document.createElement('div');
+    remove.innerText = '[Remove]';
+    remove.className = 'remove_person';
+    remove.addEventListener('click', () => {
+        if (name_arr[arr].length > 0) {
+            remove.parentNode.remove();
+            name_arr[arr].pop();
+        }
+    })
+
+    let i = 0;
+    i = check_iteration(arr, i);
+
     // Create elements
     let name_header = document.createElement('h4');
     name_header.className = 'band_member_name';
@@ -50,22 +64,23 @@ function add_person(parent, arr) {
 
     const name_label = document.createTextNode('Name: ');
     let name_input = document.createElement('input');
-    name_input.name = `band_name_${name_arr[arr].length}`; 
+    name_input.name = `band_name_${i}`; 
     name_input.type = 'text';
     name_input.className = 'person_name';
 
     const email_label = document.createTextNode('Email: ');
     let email_input = document.createElement('input');
-    email_input.name = `band_email_${name_arr[arr].length}`;
+    email_input.name = `band_email_${i}`;
     email_input.type = 'email';
 
     const phone_number_label = document.createTextNode('Phone number: ');
     let phone_number_input = document.createElement('input');
-    phone_number_input.name = `band_phone_${name_arr[arr].length}`;
+    phone_number_input.name = `band_phone_${i}`;
     phone_number_input.type = 'text';
 
     // Append elements
     new_div.appendChild(name_header);
+    new_div.appendChild(remove);
     new_div.appendChild(name_label);
     new_div.appendChild(name_input);
     new_div.appendChild(email_label);
@@ -76,4 +91,15 @@ function add_person(parent, arr) {
     // Append the new div to the parent div and add it to the array
     name_arr[arr].push(name_input);
     parent.appendChild(new_div);
+}
+
+// Check if th already exists
+function check_iteration(arr, i) {
+    const check = document.querySelectorAll(`#person_${i}`);
+
+    if (check.length > 0) {
+        i++;
+        return check_iteration(arr, i);
+    }
+    return i;
 }

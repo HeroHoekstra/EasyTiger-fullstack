@@ -20,6 +20,11 @@ header('Content-Type: text/html');
 
     <!-- Main CSS -->
     <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <!-- Some bits of css will also be used for different menus because they are mostly the same -->
+    <!-- The big menus -->
+    <link href="./css/main_menu.css" rel="stylesheet" type="text/css">
+    <!-- Buttons -->
+    <link href="./css/buttons.css" rel="stylesheet" type="text/css">
     <!-- This page CSS -->
     <link href="admin.css" rel="stylesheet" type="text/css">
 </head>
@@ -33,7 +38,7 @@ header('Content-Type: text/html');
             </label>
 
             <div class="menu_content menu_openable">
-                <form action="response.php" method="post">
+                <form action="./php/add_band.php" method="post">
                     <ul>
                         <li>
                             <h3 class="item_title">Band name:</h3>
