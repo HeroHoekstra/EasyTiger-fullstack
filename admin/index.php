@@ -20,13 +20,11 @@ header('Content-Type: text/html');
 
     <!-- Main CSS -->
     <link href="../css/style.css" rel="stylesheet" type="text/css">
-    <!-- Some bits of css will also be used for different menus because they are mostly the same -->
-    <!-- The big menus -->
-    <link href="./css/main_menu.css" rel="stylesheet" type="text/css">
+    <!-- Main layout -->
+    <!-- And maybe some other small misc items -->
+    <link href="./css/layout.css" rel="stylesheet" type="text/css">
     <!-- Buttons -->
     <link href="./css/buttons.css" rel="stylesheet" type="text/css">
-    <!-- This page CSS -->
-    <link href="admin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <main>
@@ -236,10 +234,10 @@ header('Content-Type: text/html');
             </div>
         </div>
 
-        <!--<div class="edit_event">
+        <div class="edit_event">
             <input type="checkbox" id="open_edit_event" class="open_menu_button">
             <label for="open_edit_event" aria-label="Open create edit event menu" tabindex="0">
-                <h1 class="open_menu_text">Create a new band <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
+                <h1 class="open_menu_text">Edit existing event <img src="../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_img"></h1>
             </label>
 
             <div class="menu_content menu_openable">
@@ -247,7 +245,7 @@ header('Content-Type: text/html');
 
                 </form>
             </div>
-        </div>-->
+        </div>
     </main>
 
     <!-- main.js does misc stuff -->

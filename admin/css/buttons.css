@@ -12,7 +12,11 @@
     vertical-align: middle;
 }
 
+
 /* Add people / remove people*/
+.add_people {
+    display: flex;
+}
 .add_people label {
     cursor: pointer;
 }
@@ -23,6 +27,11 @@
     vertical-align: middle;
     margin-left: 5px;
 }
+
+.open_menu_member_img {
+    width: 20px
+}
+
 
 /* Canceling and removing people / events / bands */
 .edit, .cancel_edit {
