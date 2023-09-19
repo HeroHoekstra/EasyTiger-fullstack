@@ -83,7 +83,6 @@ header('Content-Type: text/html');
         </div>
 
         <!-- Edit band menu -->
-        <!-- Still need php and a bit more css -->
         <div class="edit_band">
             <input type="checkbox" id="open_edit_band_menu" class="open_menu_button">
             <label for="open_edit_band_menu" aria-label="Open edit band menu" tabindex="0">
@@ -176,7 +175,7 @@ header('Content-Type: text/html');
             </label>
 
             <div class="menu_content menu_openable">
-                <form action="response.php" method="post">
+                <form action="./php/add_event.php" method="post">
                     <ul>
                         <li>
                             <h3 class="item_title">Event name:</h3>
@@ -203,35 +202,21 @@ header('Content-Type: text/html');
                             </ul>
 
                             <div id="band_add">
-                                <div class="add_band_band" data-band_id="3">
-                                    <p class="band_title" data-name="Fart"><b>Fart</b></p>
-                                    <ul class="band_attributes">
-                                        <li>Genre</li>
-                                        <li>Origin</li>
-                                        <li>3 band members</li>
-                                    </ul>
-                                    <p class="add edit">[Add]</p>
-                                </div>
-            
-                                <div class="add_band_band">
-                                    <p class="band_title" data-name="Tits" data-band_id="2"><b>Tits</b></p>
-                                    <ul class="band_attributes">
-                                        <li>Genre</li>
-                                        <li>Origin</li>
-                                        <li>5 band members</li>
-                                    </ul>
-                                    <p class="add edit">[Add]</p>
-                                </div>
-            
-                                <div class="add_band_band">
-                                    <p class="band_title" data-name="Balls" data-band_id="1"><b>Balls</b></p>
-                                    <ul class="band_attributes">
-                                        <li>Genre</li>
-                                        <li>Origin</li>
-                                        <li>3 band members</li>
-                                    </ul>
-                                    <p class="add edit">[Add]</p>
-                                </div>
+                                <?php
+                                foreach ($bands as $band) {
+                                    echo "
+                                    <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
+                                        <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
+                                        <ul class=\"band_attributes\">
+                                            <li>Genre: " . $band['Genre'] . "</li>
+                                            <li>Origin: " . $band['Herkomst'] . "</li>
+                                            <li>" . count($band['members']) . " band members</li>
+                                        </ul>
+                                        <p class=\"add edit\">[add]</p>
+                                    </div>
+                                    ";
+                                }
+                                ?>
                             </div>
                         </li>
                         <li>

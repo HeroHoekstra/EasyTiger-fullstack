@@ -88,16 +88,14 @@ if (isset($_POST['add_band'])) {
         $stmt->execute();
         $stmt->closeCursor();
         unset($stmt);
+
+        setcookie('succ', 'Successfully added band', time() + 3, "/");
     } catch (Exception $e) {
         echo "Error!: <br>" . $e->getMessage();
-    }
 
-    setcookie('added_band', $user_id, time() + 3, "/");
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+        setcookie('err', 'Failed adding band, try again later', time() + 3, "/");
+    }
 }
 
-// When the user finds this page
-echo "Uhhmmm... You shouldn't be here...";
-setcookie('bad', '>:(', time() + 3, "/");
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

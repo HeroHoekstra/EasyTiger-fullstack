@@ -21,7 +21,8 @@ function add_form(i) {
 
     const id = add_button[i].parentNode.dataset.band_id;
     let band_id = document.createElement('input');
-    band_id.name = `band_id_${id}`;
+    band_id.name = `band_id_${i}`;
+    band_id.value = id;
     band_id.type = "hidden";
 
     // Append inputs
