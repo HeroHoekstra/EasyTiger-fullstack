@@ -39,7 +39,7 @@ textarea {
 
 
 /* The band select menu */
-#band_edit, #band_add {
+#band_edit, #band_add, #event_add {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -75,4 +75,58 @@ textarea {
     padding-left: 10px;
     margin: 0;
     font-size: small;
+}
+
+/* Add event */
+#added_bands {
+    width: 100%;
+}
+#added_bands > .edit_band_band {
+    width: max-content;
+}
+#added_bands > .edit_band_band > div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-gap: 5px;
+}
+
+/* Error / Success msg */
+@keyframes move_up {
+    0% {
+        top: -75px;
+    } 50% {
+        top: 10px;
+    } 100% {
+        top: -75px;
+    }
+}
+
+.message {
+    position: absolute;
+
+    width: 20vw;
+    height: 30px;
+    padding: 7px;
+    margin: auto;
+
+    text-align: center;
+    line-height: 30px;
+
+    left: 0;
+    right: 0;
+
+    animation: move_up;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    transition: ease-in-out;
+}
+.succ_msg {
+    background-color: rgb(150, 200, 150);
+    border: solid 2px rgb(120, 170, 120);
+    border-radius: 3px;
+}
+.err_msg {
+    background-color: rgb(230, 130, 130);
+    border: solid 2px rgb(200, 115, 115);
+    border-radius: 3px;
 }

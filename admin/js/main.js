@@ -66,41 +66,53 @@ function change_name(e, i) {
     }
 }
 
-const search = document.querySelectorAll('.search');
-const found_display = document.querySelectorAll('.found_display');
+// Function to perform search and update display
+function performSearch(input, bandList, bandTitleList, foundDisplay) {
+    let amount = 0;
+    const searchValueLower = input.value.toLowerCase();
 
-let bands = [new Array(0), new Array(0)];
-bands[0] = Array.from(document.querySelectorAll('#band_edit .edit_band_band'));
-bands[1] = Array.from(document.querySelectorAll('#band_add .edit_band_band'));
+    for (let i = 0; i < bandTitleList.length; i++) {
+        const bandNameLower = bandTitleList[i].dataset.name.toLowerCase();
 
-let band_titles = [new Array(0), new Array(0)];
-band_titles[0] = Array.from(document.querySelectorAll('#band_edit .edit_band_band .band_title'));
-band_titles[1] = Array.from(document.querySelectorAll('#band_add .edit_band_band .band_title'));
-
-let amount = 0;
-
-for (let j = 0; j < search.length; j++) {
-    search[j].addEventListener('input', () => {
-        amount = 0;
-        for (let i = 0; i < band_titles[j].length; i++) {
-            band_name_lower = band_titles[j][i].dataset.name.toLowerCase();
-            search_value_lower = search[j].value.toLowerCase();
-
-            if (band_name_lower.includes(search_value_lower)) {
-                amount++;
-                bands[j][i].style.display = 'grid';
-            } else {
-                bands[j][i].style.display = 'none';
-            }
+        if (bandNameLower.includes(searchValueLower)) {
+            amount++;
+            bandList[i].style.display = 'grid';
+        } else {
+            bandList[i].style.display = 'none';
         }
-    
-        found_display[j].innerText = `Found ${amount} band(s) that matchs the search result`;
-        if (search.value === "") {
-            found_display[j].innerText  =`Showing all bands`;
-        }
+    }
+
+    foundDisplay.innerText = amount > 0 ?
+        `Found ${amount} band(s) that match the search result` :
+        'No matching bands found';
+
+    if (searchValueLower === "") {
+        foundDisplay.innerText = `Showing all bands`;
+    }
+}
+
+const searchInputs = document.querySelectorAll('.search');
+const foundDisplays = document.querySelectorAll('.found_display');
+
+const bandLists = [
+    Array.from(document.querySelectorAll('#band_edit .edit_band_band')),
+    Array.from(document.querySelectorAll('#band_add .edit_band_band')),
+    Array.from(document.querySelectorAll('#event_add .edit_band_band'))
+];
+
+const bandTitleLists = [
+    Array.from(document.querySelectorAll('#band_edit .edit_band_band .band_title')),
+    Array.from(document.querySelectorAll('#band_add .edit_band_band .band_title')),
+    Array.from(document.querySelectorAll('#event_add .edit_band_band .band_title'))
+];
+
+for (let j = 0; j < searchInputs.length; j++) {
+    searchInputs[j].addEventListener('input', () => {
+        performSearch(searchInputs[j], bandLists[j], bandTitleLists[j], foundDisplays[j]);
     });
-    
-    found_display[j].innerText = `Found ${amount} band(s) that match the search result`;
+
+    // Initial display update
+    performSearch(searchInputs[j], bandLists[j], bandTitleLists[j], foundDisplays[j]);
 }
 
 // Add bands to events

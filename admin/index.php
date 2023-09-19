@@ -13,6 +13,7 @@ header('Content-Type: text/html');
 
 <!DOCTYPE html>
 <html lang="en">
+    <!-- This needs WAY more css btw -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,20 @@ header('Content-Type: text/html');
     <link href="./css/buttons.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <?php
+    if (isset($_COOKIE['succ'])) {
+        $msg = $_COOKIE['succ'];
+        $col = 'succ_msg';
+    } else if (isset($_COOKIE['err'])) {
+        $msg = $_COOKIE['err'];
+        $col = 'err_msg';
+    }
+
+    if (isset($_COOKIE['succ']) || isset($_COOKIE['err'])) {
+        echo "<div class=\"message " . $col . "\"> " . $msg . " </div>";
+    }
+    ?>   
+
     <main>
         <!-- Add band menu -->
         <div class="add_band">
@@ -171,6 +186,7 @@ header('Content-Type: text/html');
             </div>
         </div>
 
+        <!-- Add event menu -->
         <div class="add_event">
             <input type="checkbox" id="open_add_event_menu" class="open_menu_button">
             <label for="open_add_event_menu" aria-label="Open create new event menu" tabindex="0">
@@ -242,7 +258,34 @@ header('Content-Type: text/html');
 
             <div class="menu_content menu_openable">
                 <form action="#" method="post">
+                    <ul>
+                        <li>
+                            <ul>
+                                <h3>Select band:</h3>
+                                <small class="found_display"></small>
+                                <br>
+                                <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                            </ul>
 
+                            <div id="event_add">
+                                <?php
+                                foreach ($bands as $band) {
+                                    echo "
+                                    <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
+                                        <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
+                                        <ul class=\"band_attributes\">
+                                            <li>Genre: " . $band['Genre'] . "</li>
+                                            <li>Origin: " . $band['Herkomst'] . "</li>
+                                            <li>" . count($band['members']) . " band members</li>
+                                        </ul>
+                                        <p class=\"add edit\">[add]</p>
+                                    </div>
+                                    ";
+                                }
+                                ?>
+                            </div>
+                        </li>
+                    </ul>
                 </form>
             </div>
         </div>

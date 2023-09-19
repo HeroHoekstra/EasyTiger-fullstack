@@ -45,6 +45,12 @@ if (isset($_POST['add_event'])) {
             }
         }
 
+        if (count($band_id) == 0) {
+            setcookie('err', 'You need to add bands to hold an event', time() + 3, '/');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+
         // Create event
         $stmt = $pdo->prepare('INSERT INTO `evenementen` (`Event_id`, `Datum`, `Starttijd`, `Entreegeld`) VALUES (:id, :date, :start_time, :price)');
         $stmt->bindParam(':id', $event_id);

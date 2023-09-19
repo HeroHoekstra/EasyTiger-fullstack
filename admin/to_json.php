@@ -5,6 +5,7 @@
 // Get data
 include "../php/connect.php";
 
+// Get bands
 $bands;
 $members;
 
@@ -22,10 +23,14 @@ try {
     $stmt = $pdo->prepare('SELECT * FROM `bandleden`');
     $stmt->execute();
     $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt->closeCursor();
+    unset($stmt);
 } catch (Exception $e) {
     echo "Error!: " . $e->getMessage();
 }
 
+// Put members into bands
 foreach ($bands as $i=>$band) {
     $bands[$i]['members'] = [];
 }
