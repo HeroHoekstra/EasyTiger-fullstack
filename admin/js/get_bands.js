@@ -8,16 +8,15 @@ for (let i = 0; i < cancel_edit.length; i++) {
 }
 
 // Make AJAX request for bands
-let data;
-const xhr = new XMLHttpRequest();
-xhr.open('GET', '../admin/to_json.php', true);
+var xhr = new XMLHttpRequest();
+xhr.open('GET', './get_bands.php', true);
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-            data = JSON.parse(xhr.responseText);
+            const data = JSON.parse(xhr.responseText);
 
             // Make correct edit screen appear
-            const edit_button = document.querySelectorAll('.edit');
+            const edit_button = document.querySelectorAll('.edit_band .edit');
             for (let i = 0; i <  edit_button.length; i++) {
                 for (let j = 0; j < data.length; j++) {
                     if (data[j].Band_id === edit_button[i].parentNode.dataset.band_id) {

@@ -121,6 +121,27 @@ if (isset($_POST['edit_band'])) {
 
         setcookie('err', 'Failed to update band', time() + 3, "/");
     }
+} else if (isset($_POST['delete_band']) && isset($_POST['sure'])) {
+    try {
+        // Delete band members
+        $stmt = $pdo->prepare('DELETE FROM `bandleden` WHERE `Band_id` = :id');
+        $stmt->bindParam(':id', $_POST['band_id']);
+        $stmt->execute();
+
+        // Delete band
+        $stmt = $pdo->prepare('DELETE FROM `band` WHERE `Band_id` = :id');
+        $stmt->bindParam(':id', $_POST['band_id']);
+        $stmt->execute();
+
+        $stmt->closeCursor();
+        unset($stmt);
+
+        setcookie('succ', 'Successfully deleted ' . $_POST['band_name'] . ' from database', time() + 3, '/');
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage();
+
+        setcookie('err', 'Failed to delete ' . $_POST['band_name'] . '', time() + 3, '/');
+    }
 }
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);

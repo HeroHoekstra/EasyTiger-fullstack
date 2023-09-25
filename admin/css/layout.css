@@ -39,7 +39,7 @@ textarea {
 
 
 /* The band select menu */
-#band_edit, #band_add, #event_add {
+#band_edit, #band_add, #event_add, #event_edit {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -78,13 +78,13 @@ textarea {
 }
 
 /* Add event */
-#added_bands {
+.added_bands {
     width: 100%;
 }
-#added_bands > .edit_band_band {
+.added_bands > .edit_band_band {
     width: max-content;
 }
-#added_bands > .edit_band_band > div {
+.added_bands > .edit_band_band > div {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-gap: 5px;

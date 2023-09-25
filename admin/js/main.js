@@ -51,21 +51,6 @@ function open_add_menu(button, menu, img) {
     button.checked = true;
 }
 
-// Change title of persons
-function change_name(e, i) {
-    const title = document.querySelectorAll('.band_member_name');
-
-    if (e.value != "") {
-        title[i].innerText = e.value;
-    } else {
-        title[i].innerText = `Person ${i + 1}`;
-    }
-
-    if (e.value.length > window.innerWidth / 50) {
-        title[i].innerText = e.value.slice(0, window.innerWidth / 50) + "...";
-    }
-}
-
 // Function to perform search and update display
 function performSearch(input, bandList, bandTitleList, foundDisplay) {
     let amount = 0;
@@ -97,13 +82,15 @@ const foundDisplays = document.querySelectorAll('.found_display');
 const bandLists = [
     Array.from(document.querySelectorAll('#band_edit .edit_band_band')),
     Array.from(document.querySelectorAll('#band_add .edit_band_band')),
-    Array.from(document.querySelectorAll('#event_add .edit_band_band'))
+    Array.from(document.querySelectorAll('#event_add .edit_band_band')),
+    Array.from(document.querySelectorAll('#event_edit .edit_band_band'))
 ];
 
 const bandTitleLists = [
     Array.from(document.querySelectorAll('#band_edit .edit_band_band .band_title')),
     Array.from(document.querySelectorAll('#band_add .edit_band_band .band_title')),
-    Array.from(document.querySelectorAll('#event_add .edit_band_band .band_title'))
+    Array.from(document.querySelectorAll('#event_add .edit_band_band .band_title')),
+    Array.from(document.querySelectorAll('#event_edit .edit_band_band .band_title')),
 ];
 
 for (let j = 0; j < searchInputs.length; j++) {
@@ -116,23 +103,23 @@ for (let j = 0; j < searchInputs.length; j++) {
 }
 
 // Add bands to events
-// Get all important divs
-const band_add = document.getElementById('band_add');
-const added_bands = document.getElementById('added_bands');
 const add_button = document.querySelectorAll('.add');
 
 for (let i = 0; i < add_button.length; i++) {
     add_button[i].addEventListener('click', () => {
+        // Get the place where that should happen
+        const place = get_gg_parent('form_list', add_button[i]).querySelector('.added_bands');
+
         // Make a copy of the div
         const copy_band = add_button[i].parentNode.cloneNode(true);
         
-        create_band_node(copy_band, add_form(i), i);
+        create_band_node(copy_band, add_form(i), i, place);
 
         add_button[i].innerText = "[Added]";
     });
 }
 
-function create_band_node(band, form, i) {
+function create_band_node(band, form, i, added_bands) {
     const button = band.querySelector('.add');
     button.innerText = "[Remove]";
     button.className = "remove edit";
@@ -145,4 +132,21 @@ function create_band_node(band, form, i) {
     band.appendChild(form);
 
     added_bands.appendChild(band);
+}
+
+function get_gg_parent(class_name, start) {
+    let parent = start;
+    let i = 0;
+
+    while (true) {
+        parent = parent.parentNode;
+
+        if (parent.classList.contains(class_name)) {
+            return parent;
+        }
+        if (i > 10) {
+            return null;
+        }
+        i++;
+    }
 }

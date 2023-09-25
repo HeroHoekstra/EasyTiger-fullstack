@@ -1,10 +1,21 @@
 <?php
+// Get bands
 ob_start();
 
-require('./to_json.php');
+require('./get_bands.php');
 
 session_start();
 $bands = $_SESSION['bands'];
+
+ob_end_clean();
+
+// Get events
+ob_start();
+
+require('./php/get_events.php');
+
+session_start();
+$events = $_SESSION['events'];
 
 ob_end_clean();
 
@@ -174,13 +185,17 @@ header('Content-Type: text/html');
                             <ul class="people menu_openable">
 
                             </ul>
-                            <input type="hidden" name="band_id" id="edit_band_id">
                         </li>
 
                         <br>
 
                         <input type="submit" name="edit_band" value="Edit Band" aria-label="Add band to database">
+                        <br>
+                        <input type="checkbox" name="sure" aria-label="Are you sure you want to delete this band">
+                        <input type="submit" name="delete_band" value="Delete Band" aria-label="Delete band">
+                        
                         <p class="cancel_edit">[Cancel]</p>
+                        <input type="hidden" name="band_id" id="edit_band_id">
                     </ul>
                 </form>
             </div>
@@ -195,7 +210,7 @@ header('Content-Type: text/html');
 
             <div class="menu_content menu_openable">
                 <form action="./php/add_event.php" method="post">
-                    <ul>
+                    <ul class="form_list">
                         <li>
                             <h3 class="item_title">Event name:</h3>
                             <input type="text" name="event_name" aria-label="Input field for the event name" tabindex="0" required>
@@ -239,7 +254,7 @@ header('Content-Type: text/html');
                             </div>
                         </li>
                         <li>
-                            <div id="added_bands">
+                            <div class="added_bands">
 
                             </div>
                         </li>
@@ -257,36 +272,93 @@ header('Content-Type: text/html');
             </label>
 
             <div class="menu_content menu_openable">
-                <form action="#" method="post">
-                    <ul>
-                        <li>
-                            <ul>
-                                <h3>Select band:</h3>
-                                <small class="found_display"></small>
-                                <br>
-                                <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                <ul>
+                    <li>
+                        <ul>
+                            <h3>Select band:</h3>
+                            <small class="found_display"></small>
+                            <br>
+                            <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                        </ul>
+
+                        <div id="event_add">
+                            <?php
+                            foreach ($events as $event) {
+                                echo "
+                                <div class=\"edit_band_band\" data-event_id=\"" . $event['Event_id'] . "\">
+                                    <p class=\"band_title\" data-name=\"" . $event['Naam'] . "\"><b>" . $event['Naam'] . "</b></p>
+                                    <ul class=\"band_attributes\">
+                                        <li>Date: " . $event['Datum'] . "</li>
+                                        <li>Price: €" . $event['Entreegeld'] . "</li>
+                                        <li>Start time: " . $event['Starttijd'] . "</li>
+                                        <li>" . count($event['performance']) . " performances</li>
+                                    </ul>
+                                    <p class=\"edit\">[Edit]</p>
+                                </div>
+                                ";
+                            }
+                            ?>
+                        </div>
+                    </li>
+                    <li>
+                        <form action="./php/add_event.php" method="post" id="edit_events">
+                            <ul class="form_list">
+                                <li>
+                                    <h3 class="item_title">Event name:</h3>
+                                    <input type="text" name="event_name" aria-label="Input field for the event name" tabindex="0" required>
+                                </li>
+                                <li>
+                                    <h3 class="item_title">Price:</h3>
+                                    <input type="number" name="price" aria-label="Input field for the event'script price" tabindex="0" step="0.01" required>
+                                </li>
+                                <li>
+                                    <h3 class="item_title">Date:</h3>
+                                    <input type="date" name="date" aria-label="Input field for the event date" tabindex="0" required>
+                                </li>
+                                <li>
+                                    <h3 class="item_title">Start time:</h3>
+                                    <input type="time" name="start_time" aria-label="Input field for the event's start time" tabindex="0" required>
+                                </li>
+                                <li>
+                                    <ul>
+                                        <h3>Select band:</h3>
+                                        <small class="found_display"></small>
+                                        <br>
+                                        <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                                    </ul>
+
+                                    <div id="event_edit">
+                                        <?php
+                                        foreach ($bands as $band) {
+                                            echo "
+                                            <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
+                                                <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
+                                                <ul class=\"band_attributes\">
+                                                    <li>Genre: " . $band['Genre'] . "</li>
+                                                    <li>Origin: " . $band['Herkomst'] . "</li>
+                                                    <li>" . count($band['members']) . " band members</li>
+                                                </ul>
+                                                <p class=\"add edit\">[Add]</p>
+                                            </div>
+                                            ";
+                                        }
+                                        ?>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="added_bands" id="added_bands">
+
+                                    </div>
+                                </li>
                             </ul>
 
-                            <div id="event_add">
-                                <?php
-                                foreach ($bands as $band) {
-                                    echo "
-                                    <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
-                                        <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
-                                        <ul class=\"band_attributes\">
-                                            <li>Genre: " . $band['Genre'] . "</li>
-                                            <li>Origin: " . $band['Herkomst'] . "</li>
-                                            <li>" . count($band['members']) . " band members</li>
-                                        </ul>
-                                        <p class=\"add edit\">[add]</p>
-                                    </div>
-                                    ";
-                                }
-                                ?>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
+                            <input type="submit" name="edit_event" value="Add event" aria-label="Submit the event to the database">
+
+                            <p class="cancel_edit">[Cancel]</p>
+                            <input type="hidden" name="event_id" id="edit_event_id">
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
@@ -295,6 +367,7 @@ header('Content-Type: text/html');
     <script src="./js/main.js"></script>
     <!-- get_band.js and change_values.js provide values to main.js -->
     <script src="./js/get_bands.js"></script>
+    <script src="./js/get_events.js"></script>
     <script src="./js/change_values.js"></script>
     <!-- Script for accessibility -->
     <script src="../js/a11y.js"></script>

@@ -103,3 +103,18 @@ function check_iteration(arr, i) {
     }
     return i;
 }
+
+// Change title of persons
+function change_name(e, i) {
+    const title = document.querySelectorAll('.band_member_name');
+
+    if (e.value !== "") {
+        title[i].innerText = e.value;
+    } else {
+        title[i].innerText = `Person ${i + 1}`;
+    }
+
+    if (e.value.length > window.innerWidth / 50) {
+        title[i].innerText = e.value.slice(0, window.innerWidth / 50) + "...";
+    }
+}

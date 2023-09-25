@@ -1,6 +1,7 @@
 <?php
-// For some reason this script doesn't work when put in the php folder
-// So that's why it isn't in there
+// When you move this script to anywhere but this place it just decides to not work
+// When you give it the correct path it says that that path doesn't exist
+// When it does say that the path exists it won't parse the JSON so just don't move it
 
 // Get data
 include "../php/connect.php";

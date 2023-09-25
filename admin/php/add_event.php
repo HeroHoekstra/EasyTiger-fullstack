@@ -52,8 +52,9 @@ if (isset($_POST['add_event'])) {
         }
 
         // Create event
-        $stmt = $pdo->prepare('INSERT INTO `evenementen` (`Event_id`, `Datum`, `Starttijd`, `Entreegeld`) VALUES (:id, :date, :start_time, :price)');
+        $stmt = $pdo->prepare('INSERT INTO `evenementen` (`Event_id`, `Naam`, `Datum`, `Starttijd`, `Entreegeld`) VALUES (:id, :name, :date, :start_time, :price)');
         $stmt->bindParam(':id', $event_id);
+        $stmt->bindParam(':name', $name);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':start_time', $start_time);
         $stmt->bindParam(':price', $price);
@@ -83,7 +84,8 @@ if (isset($_POST['add_event'])) {
 
         setcookie('err', 'Failed to add event', time() + 3, '/');
     }
-
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+} else {
+    setcookie('err', 'Failed to add event', time() + 3, '/');
 }
-?>
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
