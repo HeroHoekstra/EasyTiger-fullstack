@@ -100,3 +100,29 @@ main {
     font-size: 16px;
     text-align: right;
 }
+
+/* Error msg */
+.message {
+    position: absolute;
+
+    width: 20vw;
+    height: max-content;
+    padding: 7px;
+    margin: auto;
+
+    text-align: center;
+    line-height: 30px;
+
+    left: 0;
+    right: 0;
+
+    animation: move_up;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    transition: ease-in-out;
+}
+.err_msg {
+    background-color: rgb(230, 130, 130);
+    border: solid 2px rgb(200, 115, 115);
+    border-radius: 3px;
+}

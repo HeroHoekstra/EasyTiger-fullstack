@@ -1,3 +1,29 @@
+<?php
+include "./php/connect.php";
+
+// Get event data
+try {
+    $stmt = $pdo->prepare('SELECT 
+        evenementen.Naam AS Event_Name, evenementen.Datum AS Event_Date, evenementen.Starttijd AS Event_Starttime, evenementen.Entreegeld AS Event_Price,
+        optredens.Band_id AS Band_id, optredens.Sets AS Per_Sets, optredens.Starttijd AS Per_Starttime, optredens.Eindtijd AS Per_Endtime,
+        band.Naam AS Band_Name, band.Genre AS Band_Genre, band.Herkomst AS Band_Origin, band.Omschrijving AS Band_Desc
+    FROM evenementen
+    LEFT JOIN optredens ON evenementen.Event_id = optredens.Event_id
+    LEFT JOIN band ON optredens.Band_id = band.Band_id
+    WHERE evenementen.Datum > CURRENT_DATE()');
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $stmt->closeCursor();
+    unset($stmt);
+
+    print_r($result);
+} catch (Exception $e) {
+    echo "Error!: " . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +46,7 @@
     <nav>
         <!-- Open menu button -->
         <input type="checkbox" id="open_menu">
-        <label for="open_menu" role="button" aria-label="Open the menu" tabindex="0" class="menu-icon">
+        <label for="open_menu" aria-label="Open the menu" tabindex="0" class="menu-icon">
             <img src="./assets/svg/misc/list.svg" alt="Menu button" class="menu-icon">
         </label>
 
@@ -28,13 +54,13 @@
         <div id="menu" class="menu-background">
             <div id="menu_content">
             <!-- Close menu button -->
-            <label for="open_menu" role="button" aria-label="Close the menu" tabindex="0">
+            <label for="open_menu" aria-label="Close the menu" tabindex="0">
                 <img src="./assets/svg/misc/x-lg.svg" alt="Close menu button" class="menu-close">
             </label>
 
             <!-- Theme -->
             <input type="checkbox" id="theme">
-            <label for="theme" role="button" aria-label="Change website theme" tabindex="0">
+            <label for="theme" aria-label="Change website theme" tabindex="0">
                 <img src="./assets/svg/theme/brightness-high-fill.svg" id="light_mode">
                 <img src="./assets/svg/theme/moon-stars-fill.svg" id="dark_mode">
             </label>
@@ -45,14 +71,14 @@
 
         <!-- Login and signup -->
         <input type="checkbox" id="login_button">
-        <label for="login_button" class="login" role="button" aria-label="Open login menu" tabindex="0">
+        <label for="login_button" class="login" aria-label="Open login menu" tabindex="0">
             <img src="./assets/svg/user/person-circle.svg" alt="Login button"> Login
         </label>
     </nav>
 
 
     <!-- Login menu -->
-    <div id="login_menu" class="menu-background" role="dialog" aria-label="Login menu">
+    <div id="login_menu" class="menu-background" aria-label="Login menu">
         <div id="login_menu_content">
             <!-- Close menu -->
             <button id="login_button" aria-label="Close login menu" tabindex="0">
@@ -78,7 +104,7 @@
                     <div class="input-border"></div>
                 </div>
         
-                <input type="submit" name="submit" value="Log in" role="button" aria-label="Submit login information button">
+                <input type="submit" name="submit" value="Log in" aria-label="Submit login information button">
             </form>
 
             <form method="post" action="./php/login.php" class="login-form" id="sign_up" aria-label="Login form">
@@ -112,9 +138,9 @@
                     <div class="input-border"></div>
                 </div>
 
-                <input type="submit" name="submit" value="Sign up" role="button" aria-label="Submit login information button">
+                <input type="submit" name="submit" value="Sign up" aria-label="Submit login information button">
             </form>
-            <button id="switch_login_mode" role="button" aria-label="switch to sign up">Don't have an account?</button>
+            <button id="switch_login_mode" aria-label="switch to sign up">Don't have an account?</button>
             <script type="text/javascript">
                 const butn = document.getElementById('switch_login_mode');
                 const login_form = document.getElementById('login');
@@ -147,16 +173,16 @@
 
     <main>
         <!-- About us -->
-        <div class="subsection" role="region" aria-label="about us section">
-            <h2 class="subsection-title" role="heading" aria-level="2">About Us:</h2>
+        <div class="subsection" aria-label="about us section">
+            <h2 class="subsection-title" aria-level="2">About Us:</h2>
             <p class="subsection-text" aria-label="About Us Text">
               Easy Tiger Patio is a unique cafe and music theater that brings together great music and a cozy atmosphere. We are passionate about hosting unforgettable music nights featuring talented bands from various genres. Our mission is to provide a platform for artists to showcase their skills and for music enthusiasts to immerse themselves in a vibrant and engaging experience.
             </p>
         </div>
 
         <!-- Our events -->       
-        <div class="subsection" role="region" aria-label="our events section">
-            <h2 class="subsection-title" role="heading" aria-level="2">Our Events:</h2>
+        <div class="subsection" aria-label="our events section">
+            <h2 class="subsection-title" aria-level="2">Our Events:</h2>
             <p class="subsection-text" aria-label="our events text">
                 At Easy Tiger Patio, we curate an exciting lineup of bands and musicians who deliver outstanding performances. From electrifying headlining acts to talented supporting bands, our events cater to diverse musical tastes. On special occasions, we also organize festivals where multiple headlining acts captivate the audience throughout the day or evening.
                 <br>
@@ -165,45 +191,55 @@
         </div>
 
         <!-- Band showcase -->
-        <div class="subsection" role="region" aria-label="band showcase section">
-            <h2 class="subsection-title" role="header" aria-level="2">Band Showcase:</h2>
+        <div class="subsection" aria-label="band showcase section">
+            <h2 class="subsection-title" aria-level="2">Band Showcase:</h2>
             <p class="subsection-text" aria-label="band showcase text">
                 We take pride in showcasing incredible bands and their unique talents. Get to know the bands that grace our stage, their music genres, origins, and captivating descriptions. You'll find a diverse range of artists, each with their own distinct style and sound.
             </p>
         </div>
 
         <!-- Tickets and admission -->
-        <div class="subsection" role="region" aria-label="tickets and admission">
-            <h2 class="subsection-title" role="header" aria-level="2">Tickets and Admission:</h2>
+        <div class="subsection" aria-label="tickets and admission">
+            <h2 class="subsection-title" aria-level="2">Tickets and Admission:</h2>
             <p class="subsection-text" aria-label="tickets and admission text">
                 While some of our events offer free admission, many require purchasing tickets to ensure the best experience for our guests. We believe in supporting the artists, and their performances come at a price. Stay tuned for upcoming events and ticket availability, as we bring you the best in live music entertainment.
             </p>
         </div>
 
-        <!-- Experiance and enjoyment -->
-        <div class="subsection" role="region" aria-label="experience and enjoyment">
-            <h2 class="subsection-title" role="header" aria-level="2">Experience and Enjoyment:</h2>
+        <!-- Experience and enjoyment -->
+        <div class="subsection" aria-label="experience and enjoyment">
+            <h2 class="subsection-title" aria-level="2">Experience and Enjoyment:</h2>
             <p class="subsection-text" aria-label="experience and enjoyment text">
                 Easy Tiger Patio isn't just about the music; it's about creating a memorable experience for every visitor. With a friendly and attentive staff, comfortable seating, and an inviting ambiance, we strive to make your time with us truly enjoyable. Sit back, relax, and let the music transport you to a place of pure bliss.
             </p>
         </div>
 
         <!-- Future events and prices -->
-        <div class="subsection upcoming" role="region" aria-label="upcoming events information">
+        <div class="subsection upcoming" aria-label="upcoming events information">
             <div class="upcoming-content">
                 <!-- Set these in a for loop in php -->
                 <div class="upcoming-event">
-                    <h2 class="event-title" role="header" aria-level="2">[event title]</h2>
+                    <h2 class="event-title" aria-level="2">[event title]</h2>
                     <h3 class="event-date">[date]</h3>
                     <h4 class="event-genre">[genre]</h4>
                     <h5 class="tickets-left">There are [amount] tickets left</h5>
                 </div>
+                <?php
+                foreach ($result as $event) {
+                    print_r($event);
+                    echo "
+                    <div class='upcoming-event'>
+                        <h2 class='event-title'></h2>
+                    </div>
+                    ";
+                }
+                ?>
             </div>
         </div>
 
         <!-- Stay connected -->
-        <div class="subsection" role="region" ariab-label="stay connected">
-            <h2 class="subsection-title" role="header" aria-level="2">Stay Connected:</h2>
+        <div class="subsection" ariab-label="stay connected">
+            <h2 class="subsection-title" aria-level="2">Stay Connected:</h2>
             <p class="subsection-text" aria-label="stay connected text">
                 To stay up to date with the latest news, upcoming events, and special offers, join our mailing list or follow us on social media. Don't miss out on the exciting performances and exclusive promotions happening at Easy Tiger Patio.
                 <br>
@@ -217,7 +253,7 @@
         <ul>
             <p><b>Contact us:</b></p>
             <li>Easy Tiger Patio</li>
-            <li>123 Main Street, Cityville</li>
+            <li>123 Main Street, City ville</li>
             <li>Phone: 555-123-4567</li>
             <li>Email: info@easytiger.com</li>
         </ul>
@@ -226,17 +262,17 @@
         <ul class="links">
             <p><b>Follow us:</b></p>
             <li>
-            <a href="https://youtu.be/ee6DUqNarek" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our YouTube channel">
+            <a href="https://youtu.be/ee6DUqNarek" target="_blank" class="footer-link" tabindex="0" aria-label="Visit our YouTube channel">
                 <img src="./assets/svg/social/youtube.svg" alt="YouTube logo"> Youtube
             </a>
             </li>
             <li>
-            <a href="https://twitter.com/KFC_ES" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our Twitter profile">
+            <a href="https://twitter.com/KFC_ES" target="_blank" class="footer-link" tabindex="0" aria-label="Visit our Twitter profile">
                 <img src="./assets/svg/social/twitter.svg" alt="Twitter logo"> Twitter
             </a>
             </li>
             <li>
-            <a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank" class="footer-link" tabindex="0" role="link" aria-label="Visit our Tumblr blog">
+            <a href="https://www.tumblr.com/charlottan/718874362310246400" target="_blank" class="footer-link" tabindex="0" aria-label="Visit our Tumblr blog">
                 <img src="./assets/svg/social/tumblr.svg" alt="Tumblr logo"> Tumblr
             </a>
             </li>
