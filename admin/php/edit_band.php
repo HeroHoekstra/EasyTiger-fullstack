@@ -106,7 +106,7 @@ if (isset($_POST['edit_band'])) {
                 unset($stmt);
             }
 
-            // Finally update the everything that was there before
+            // Finally update everything that was there before
             $stmt = $pdo->prepare('UPDATE `bandleden` SET `Naam` = :name, `Email` = :email, `Telefoon` = :phone WHERE `Lid_id` = :m_id AND `Band_id` = :b_id');
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':email', $bandm_email[$i]);
@@ -140,7 +140,7 @@ if (isset($_POST['edit_band'])) {
     } catch (Exception $e) {
         echo "Error!: " . $e->getMessage();
 
-        setcookie('err', 'Failed to delete ' . $_POST['band_name'] . '', time() + 3, '/');
+        setcookie('err', 'Failed to delete ' . $_POST['band_name'], time() + 3, '/');
     }
 }
 

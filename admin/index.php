@@ -301,7 +301,7 @@ header('Content-Type: text/html');
                         </div>
                     </li>
                     <li>
-                        <form action="./php/add_event.php" method="post" id="edit_events">
+                        <form action="./php/edit_event.php" method="post" id="edit_events">
                             <ul class="form_list">
                                 <li>
                                     <h3 class="item_title">Event name:</h3>
@@ -353,6 +353,9 @@ header('Content-Type: text/html');
                             </ul>
 
                             <input type="submit" name="edit_event" value="Add event" aria-label="Submit the event to the database">
+                            <br>
+                            <input type="checkbox" name="sure_ev" aria-label="Are you sure you want to delete this band">
+                            <input type="submit" name="delete_event" value="Delete Event" aria-label="Delete event">
 
                             <p class="cancel_edit">[Cancel]</p>
                             <input type="hidden" name="event_id" id="edit_event_id">

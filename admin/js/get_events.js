@@ -43,6 +43,12 @@ ev_xhr.onreadystatechange = function() {
                                 place.querySelector(`input[name=\'start_time_${k}\']`).value = remove_00(data[j].performance[k].Starttijd);
                                 place.querySelector(`input[name=\'end_time_${k}\']`).value = remove_00(data[j].performance[k].Eindtijd);
                                 place.querySelector(`input[name=\'sets_${k}\']`).value = data[j].performance[k].Sets;
+
+                                let per_id = document.createElement('input');
+                                per_id.type = 'hidden';
+                                per_id.name = `performance_id_${k}`;
+                                per_id.value = data[j].performance[k].Optreden_id;
+                                place.querySelectorAll('.edit_band_band')[k].appendChild(per_id);
                             }
                         });
                     }
