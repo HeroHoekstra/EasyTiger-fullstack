@@ -1,5 +1,5 @@
 <?php
-include "../../php/connect.php";
+include "../../../php/connect.php";
 
 function uniq_id($pdo) {
     $uniq_id = hexdec(uniqid());

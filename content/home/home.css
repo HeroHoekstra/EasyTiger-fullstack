@@ -1,0 +1,93 @@
+/* nav select sections */
+.page-section {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: absolute;
+    right: 0;
+    top: 50vh;
+
+    z-index: 100;
+}
+
+.nav-section-select {
+    display: flex;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border:solid white 1px;
+    border-radius: 50%;
+
+    background-color: #000A1A80;
+}
+
+.nav-section-select img {
+    width: 24px;
+}
+
+.page-section div:nth-of-type(1) {
+    rotate: -90deg;
+}
+.page-section div:nth-of-type(2) {
+    rotate: 90deg;
+}
+
+/* header */
+header {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url("../../assets/webp/concert.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-title-container {
+    margin-top: 10px;
+}
+
+.header-background {
+    position: absolute;
+    background-color: var(--background);
+}
+
+.header-title {
+    margin: 0;
+    padding: 10px;
+    height: max-content;
+
+    text-align: center;
+
+    background-image: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    backdrop-filter: blur(2px);
+}
+
+/* Add break when small screen */
+@media only screen and (max-width: 850px) {
+    .company-name::after {
+        content: '\a';
+        white-space: pre;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .header-title {
+        font-size: 27px;
+    }
+}
+
+.main-item {
+    height: 100vh;
+}

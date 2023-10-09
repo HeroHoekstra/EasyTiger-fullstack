@@ -1,5 +1,5 @@
 <?php
-include "../../php/connect.php";
+include "../../../php/connect.php";
 
 // Get events
 $events;

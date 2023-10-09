@@ -1,0 +1,157 @@
+@font-face {
+    font-family: DGO;
+    src: url("../../assets/fonts/DelaGothicOne.ttf");
+}
+@font-face {
+    font-family: GV;
+    src: url("../../assets/fonts/Gabarito-Variable.ttf");
+}
+
+:root {
+    --text: #fafcff;
+    --background: #000a1a;
+    --primary: #bb98f0;
+    --secondary: #05337a;
+    --accent: #7dc94a;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+html, body {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: GV, sans-serif;
+
+    color: var(--text);
+    background-color: var(--background);
+}
+
+/* Make main be big enough to put footer at the bottom of page */
+main {
+    flex: 1;
+}
+
+
+/* nav */
+nav {
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--secondary);
+
+    transition: height 0.3s ease-in-out;
+}
+.nav-item {
+    display: flex;
+    position: relative;
+
+    align-items: center;
+}
+.nav-anchor {
+    position: relative;
+    z-index: 2;
+
+    color: white;
+    text-decoration: none;
+}
+/* arrow open */
+.nav-anchor .img-arrow {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.nav-anchor:hover .img-arrow,
+#stay_opened:checked ~ .nav-anchor .img-arrow,
+.nav-sub-item:hover ~ .nav-anchor .img-arrow {
+    rotate: 90deg;
+    transition: 250ms;
+}
+#stay_opened {
+    display: none;
+}
+
+/* sub menu */
+.nav-sub-item {
+    position: absolute;
+    top: -100px;
+
+    width: max-content;
+    padding: 15px 5px 5px 5px;
+    font-size: smaller;
+    z-index: 0;
+
+    background-color: var(--secondary);
+}
+.nav-sub-item ul {
+    margin: 0;
+    padding: 5px 10px;
+
+    list-style: none;
+}
+/* show sub menu on hover of parent */
+.nav-item:hover > .nav-sub-item,
+#stay_opened:checked ~ .nav-sub-item,
+.nav-sub-item:hover {
+    top: 15px;
+}
+/* nav sub items */
+.select-page-section a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* footer default */
+footer {
+    flex-shrink: 0;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, max-content);
+
+    padding: 0 10px;
+
+    background-color: var(--secondary);
+}
+footer h4 {
+    margin: 0;
+    padding: 0;
+}
+footer ul {
+    list-style: none;
+
+    margin-top: 0;
+}
+footer a {
+    color: var(--text);
+}
+
+.disclaimer {
+    font-size: x-small;
+    grid-column: 1 / span 2
+}
+
+/* footer < 550px */
+@media only screen and (max-width: 550px) {
+    footer {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, max-content);
+    }
+
+    .disclaimer {
+        grid-column: 1;
+    }
+}
