@@ -251,7 +251,7 @@ try {
         </div>
 
         <!-- Stay connected -->
-        <div class="subsection" ariab-label="stay connected">
+        <div class="subsection" aria-label="stay connected">
             <h2 class="subsection-title" aria-level="2">Stay Connected:</h2>
             <p class="subsection-text" aria-label="stay connected text">
                 To stay up to date with the latest news, upcoming events, and special offers, join our mailing list or follow us on social media. Don't miss out on the exciting performances and exclusive promotions happening at Easy Tiger Patio.

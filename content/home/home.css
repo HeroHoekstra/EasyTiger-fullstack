@@ -11,7 +11,6 @@
 
     z-index: 100;
 }
-
 .nav-section-select {
     display: flex;
     justify-content: center;
@@ -24,39 +23,71 @@
 
     background-color: #000A1A80;
 }
-
 .nav-section-select img {
     width: 24px;
 }
-
-.page-section div:nth-of-type(1) {
+.page-section a:nth-of-type(1) {
     rotate: -90deg;
 }
-.page-section div:nth-of-type(2) {
+.page-section a:nth-of-type(2) {
     rotate: 90deg;
 }
 
+/* background gradiant */
+.follow-gradiant {
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    z-index: -10;
+}
+.background-gradiant,
+.gradiant {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+}
+.background-gradiant {
+    background: radial-gradient(at center, #0000 0%, var(--background) 75%);
+    z-index: -1;
+}
+
+.gradiant {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    z-index: -2;
+}
+
+
 /* header */
 header {
-    position: relative;
-
     display: flex;
     justify-content: center;
 
     width: 100vw;
     height: 100vh;
 
-    background-image: url("../../assets/webp/concert.webp");
+    background-image:
+            linear-gradient(to bottom, #0000, #0000, var(--background)),
+            url("../../assets/webp/concert.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
 .header-title-container {
-    margin-top: 10px;
+    position: relative;
+
+    height: max-content;
+    width: max-content;
 }
 
 .header-background {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     background-color: var(--background);
 }
 
@@ -87,7 +118,16 @@ header {
         font-size: 27px;
     }
 }
+@media only screen and (max-width: 370px) {
+    .header-title {
+        font-size: 25px;
+    }
+}
 
+/* main content */
 .main-item {
+    padding-top: 20px;
     height: 100vh;
 }
+
+/* about us */

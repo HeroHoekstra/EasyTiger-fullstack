@@ -34,9 +34,9 @@ header('Content-Type: text/html');
     <link href="../home/css/style.css" rel="stylesheet" type="text/css">
     <!-- Main layout -->
     <!-- And maybe some other small misc items -->
-    <link href="css/layout.css" rel="stylesheet" type="text/css">
+    <link href="./css/layout.css" rel="stylesheet" type="text/css">
     <!-- Buttons -->
-    <link href="css/buttons.css" rel="stylesheet" type="text/css">
+    <link href="./css/buttons.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <?php
