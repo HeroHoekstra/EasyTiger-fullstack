@@ -2,29 +2,86 @@
     position: relative;
 }
 
-/* background gradiant */
-.show-case-background,
-.show-case-gradiant,
 .show-case {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(0, -50%);
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    grid-row-gap: 10px;
 
-    width: 100%;
-    height: 100%;
+    justify-items: center;
+    align-items: center;
+
+    width: 100vw;
+    height: max-content;
+    margin: 0;
+    padding: 0;
 }
 
-.show-case-gradiant {
-    background: linear-gradient(45deg, var(--secondary), var(--accent));
-    z-index: 1;
-}
-.show-case-background {
-    background: radial-gradient(at center, #0000 0%, var(--background) 75%);
+/* Showcase items */
+.showcase-item {
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
 
-    z-index: 2;
+    padding: 5px;
+    width: 25vw;
+
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.25);
 }
-.show-case {
-    transform: translate(0, -50%);
-    z-index: 3;
+.event-date {
+    text-align: right;
+}
+
+.showcase-item h3 {
+    margin: 0;
+}
+
+/* Band showcases */
+.band-showcase {
+    display: flex;
+    flex-direction: row;
+
+    grid-column: 1 / span 2;
+}
+
+.band-showcase-item {
+    padding: 5px;
+    display: none;
+}
+.band-name {
+    animation: fadeInOut 5s linear infinite;
+}
+
+.more-events {
+    display: block;
+
+    width: 100vw;
+    text-align: center;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    25%, 75% {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 1210px) {
+    .show-case {
+        grid-template-columns: repeat(2, 50%);
+    }
+    .showcase-item {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .show-case {
+        grid-template-columns: 100%;
+    }
+    .showcase-item:nth-of-type(n+4){
+        display: none;
+    }
 }

@@ -1,0 +1,10 @@
+.login-form-item {
+    display: flex;
+    flex-direction: row;
+
+    height: max-content;
+}
+.login-input-context {
+    margin: 0;
+}
+

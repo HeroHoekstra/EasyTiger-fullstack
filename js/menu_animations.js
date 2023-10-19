@@ -1,6 +1,6 @@
 // Animate and add functionality to the menu
 // With functionality I mean make it pop out from the left
-// Also the login menu (menu is menu)
+// Also the user menu (menu is menu)
 
 // Make delay function
 function delay(ms) {
@@ -94,12 +94,12 @@ function login_menu_open() {
         if (!checked) login_menu.style.display = 'none';
     }, 120);
 }
-// When the login button is clicked
+// When the user button is clicked
 login_button.addEventListener('click', () => {login_menu_open();});
 
 
 // Technically this is also a menu animation...
-// It makes the login input border expand when focussed
+// It makes the user input border expand when focussed
 const borders = document.querySelectorAll('.input-border');  
 
 for (let i = 0; i < borders.length; i++) {

@@ -1,7 +1,7 @@
 <?php
 // Err1: sign up, passes are not the same
 // Err2: sign up, email already exists
-// Err3: login, incorrect email or password
+// Err3: user, incorrect email or password
 
 include 'connect.php';
 

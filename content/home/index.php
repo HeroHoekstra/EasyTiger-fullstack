@@ -5,7 +5,7 @@ include "../../php/connect.php";
 try {
     $stmt = $pdo->prepare('SELECT 
         evenementen.Event_id AS Event_id, evenementen.Naam AS Event_Name, evenementen.Datum AS Event_Date, evenementen.Starttijd AS Event_Starttime, evenementen.Entreegeld AS Event_Price,
-        optredens.Band_id AS Band_id, optredens.Sets AS Per_Sets, optredens.Starttijd AS Per_Starttime, optredens.Eindtijd AS Per_Endtime,
+        optredens.Band_id AS Band_id, optredens.Sets AS Per_Sets,
         band.Naam AS Band_Name, band.Genre AS Band_Genre, band.Herkomst AS Band_Origin, band.Omschrijving AS Band_Desc
     FROM evenementen
     LEFT JOIN optredens ON evenementen.Event_id = optredens.Event_id
@@ -20,10 +20,13 @@ try {
         $event_id = $row['Event_id'];
 
         if (!isset($grouped_events[$event_id])) {
-            $grouped_events[$event_id] = array();
+            $grouped_events[$event_id] = array(
+                'Event_id' => $event_id,
+                'Per' => array(),
+            );
         }
 
-        $grouped_events[$event_id][] = $row;
+        $grouped_events[$event_id]['Per'][] = $row;
     }
 
     $stmt->closeCursor();
@@ -46,11 +49,13 @@ try {
     <link href="../../assets/webp/favicon.webp" rel="icon">
 
     <!-- Main CSS for nav and footer -->
-    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="../generic/main.css" rel="stylesheet" type="text/css">
     <link href="home.css" rel="stylesheet" type="text/css">
     <link href="show%20case.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <noscript>Please enable javascript for the site to work properly</noscript>
+
     <nav>
         <div class="nav-bar" id="nav_bar">
             <div class="nav-item home">
@@ -85,6 +90,16 @@ try {
                         Home <!-- Page title -->
                         <img src="../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
                     </label>
+                </a>
+            </div>
+
+            <div class="nav-item login">
+                <a href="../user/login/index.php?login=Login">
+                    Login
+                </a>
+
+                <a href="../user/login/index.php?login=Sign up">
+                    Sign up
                 </a>
             </div>
         </div>
@@ -140,12 +155,10 @@ try {
                 Here are some peeks at our upcoming events:
             </p>
 
-            <!--<div class="show-case-background"></div>
-            <div class="show-case-gradiant"></div>
-            <div class="show-case">
-                 <?php /*
-                 if (count($grouped_events) > 3) {
-                     for ($i = 0; $i < 3; $i++) {
+            <div class="show-case" id="show_case">
+                 <?php
+                 if (count($grouped_events) >= 6) {
+                     for ($i = 0; $i < 6; $i++) {
                          showcaseDisplay($grouped_events[$i]);
                      }
                  } else {
@@ -158,29 +171,29 @@ try {
                      echo "
                     <div class='showcase-item'>
                         <div class='event-name'>
-                            <h2>" . $event[0]['Event_Name'] . "</h2>
+                            <h2>" . $event['Per'][0]['Event_Name'] . "</h2>
                         </div>
                         <div class='event-date'>
-                            <h3>" . $event[0]['Event_Date'] . "</h3>
+                            <h3>" . $event['Per'][0]['Event_Date'] . "</h3>
+                            <a href='../tickets/index.php?event_id=". $event['Event_id'] . "'><i>Get your tickets here!</i></a>
                         </div>
                         
-                        <!-- Display all bands partaking -->
                         <div class='band-showcase'>
                             ";
 
-                    foreach ($event as $band) {
+                    foreach ($event['Per'] as $band) {
                         echo "
                         <div class='band-showcase-item'>
+                            <h3>These bands will be perfroming:</h3>
                             <h3 class='band-name'>" . $band['Band_Name'] . "</h3>
-                            <h4 class='band-start'>" . $band['Per_Starttime'] . "</h4>
-                            <h4 class='band-end'>" . $band['Per_Endtime'] . "</h4>
                          </div>
                         ";
                     }
                     echo "</div></div>";
-                 }*/
+                 }
                  ?>
-            </div>-->
+            </div>
+            <a href="#" class="more-events"><i><b>And more!</b></i></a>
         </div>
 
         <div class="main-item">
@@ -248,6 +261,7 @@ try {
         const background = document.getElementById('header_bg');
         const title = document.getElementById('header_title');
 
+
         function fitBackground() {
             const width = title.offsetWidth;
             const height = title.offsetHeight;
@@ -264,6 +278,63 @@ try {
 
         window.addEventListener('resize', fitBackground);
     </script>
-    <script src="./js/nav.js"></script>
+    <script>
+        const container = document.getElementById('show_case');
+        const bandShowcases = document.querySelectorAll('.showcase-item');
+
+        // Cycle bands
+        let currentBandCycle = 0;
+        const bands = [];
+
+        for (let i = 0; i < bandShowcases.length; i++) {
+            bands[i] = bandShowcases[i].querySelectorAll('.band-showcase-item');
+        }
+
+        function cycleBands() {
+            const waitTime = 5000;
+            let i = 0;
+
+            function changeBandPos() {
+                for (let j = 0; j < bands.length; j++) {
+                    const currentBand = i % bands[j].length;
+                    for (let k = 0; k < bands[j].length; k++) {
+                        bands[j][k].style.display = 'none';
+                    }
+
+                    bands[j][currentBand].style.display = 'block';
+                }
+                i++;
+            }
+
+            changeBandPos();
+            const interval = setInterval(changeBandPos, waitTime);
+        }
+
+        cycleBands();
+
+        // If band title is too big
+        const bandName = document.querySelectorAll('.event-name > h2');
+        let names = [];
+        for (let i = 0; i < bandName.length; i++) {
+            names.push(bandName[i].innerText);
+        }
+        function change_name(i) {
+            if (window.innerWidth < 430 && names[i].length > 10) {
+                bandName[i].innerText = names[i].slice(0, 8) + "...";
+            } else {
+                bandName[i].innerText = names[i]
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            for (let i = 0; i < bandShowcases.length; i++) {
+                change_name(i);
+            }
+        });
+        for (let i = 0; i < bandShowcases.length; i++) {
+            change_name(i);
+        }
+    </script>
+    <script src="../generic/nav.js"></script>
 </body>
 </html>

@@ -65,8 +65,10 @@ if (isset($_POST['add_event'])) {
 
         // Add performances to the event
         foreach ($band_id as $i=>$id) {
+            $unique_id = uniq_id($pdo);
+
             $stmt = $pdo->prepare('INSERT INTO `optredens` (`Optreden_id`, `Event_id`, `Band_id`, `Sets`, `Starttijd`, `Eindtijd`) VALUES (:op_id, :ev_id, :ba_id, :sets, :start_time, :end_time)');
-            $stmt->bindParam(':op_id', uniq_id($pdo));
+            $stmt->bindParam(':op_id', $unique_id);
             $stmt->bindParam(':ev_id', $event_id);
             $stmt->bindParam(':ba_id', $id);
             $stmt->bindParam(':sets', $sets[$i]);

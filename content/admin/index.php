@@ -95,7 +95,7 @@ header('Content-Type: text/html');
                                 </label>
                                 <input type="checkbox" id="open_band_member_menu" class="open_menu_button open_band_member_menu">
                                 <label for="open_band_member_menu" aria-label="Open create band menu" tabindex="0">
-                                    <img src="../../assets/svg/misc/caret-right.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
+                                    <img src="../../assets/svg/misc/caret-right-fill.svg" alt="open menu button" class="open_menu_member_img open_menu_img">
                                 </label>
                             </div>
                             <ul class="people menu_openable">

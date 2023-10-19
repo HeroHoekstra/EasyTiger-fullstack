@@ -48,11 +48,11 @@
     width: 100vw;
     height: 100vh;
 }
+
 .background-gradiant {
     background: radial-gradient(at center, #0000 0%, var(--background) 75%);
     z-index: -1;
 }
-
 .gradiant {
     background: linear-gradient(45deg, var(--secondary), var(--primary));
     z-index: -2;
@@ -127,7 +127,6 @@ header {
 /* main content */
 .main-item {
     padding-top: 20px;
-    height: 100vh;
+    min-height: 100vh;
+    height: min-content;
 }
-
-/* about us */
