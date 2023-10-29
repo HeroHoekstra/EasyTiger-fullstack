@@ -1,3 +1,24 @@
+<?php
+if (!isset($_COOKIE['login'])) {
+    header('Location: ../../home/');
+    exit();
+}
+
+include "../../../php/connect.php";
+
+try {
+    $stmt = $pdo->prepare('SELECT `Bezoeker_id`, `Username`, `Email`, `Postcode`, `Pass`, `Is_Admin` FROM `bezoeker` WHERE `Username` = :name');
+    $stmt->bindParam(':name', $_COOKIE['login']);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt->closeCursor();
+    unset($stmt);
+} catch (PDOException $e) {
+    echo "Error!: " . $e->getMessage();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,21 +26,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>
-        <?php
-        if (isset($_GET['login'])) {
-            echo $_GET['login'];
-        } else {
-            echo "Login";
-        }
-        ?>
-    </title>
+    <title>Edit account</title>
     <!-- Favicon -->
     <link href="../../../assets/webp/favicon.webp" rel="icon">
 
-    <!-- Stylesheets -->
+    <!-- CSS -->
     <link href="../../generic/main.css" rel="stylesheet" type="text/css">
-    <link href="./login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <?php  if (isset($_COOKIE['succ'])) { ?>
@@ -68,77 +80,75 @@
 
     <main>
         <div class="main-item">
-            <!-- Login -->
-            <?php if (!isset($_GET['login']) || $_GET['login'] != 'Sign up') { ?>
-                <form method="post" class="login-form" action="./php/login.php">
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Username: </h4>
-                        <input type="text" name="name" class="login-input" required>
-                    </label>
-                    <br>
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Password: </h4>
-                        <input type="password" name="pass" class="login-input" required>
-                    </label>
-                    <br>
+            <form method="post" action="edit.php">
+                <label>
+                    Username:
+                    <input type="text" name="name" value="<?php echo $result[0]['Username'] ?>">
+                </label>
+                <br>
 
-                    <label>
-                        <small class="login-input-context remember-me">Remember me:</small>
-                        <input type="checkbox" name="remember">
-                    </label>
-                    <br>
+                <label>
+                    Email:
+                    <input type="email" name="email" value="<?php echo $result[0]['Email'] ?>">
+                </label>
+                <br>
 
-                    <input type="submit" name="login">
-                    <br>
-                    <small><a href="?login=Sign%20up"><b><i>Don't have an account?</i></b></a></small>
-                </form>
+                <label>
+                    Postal code:
+                    <input type="text" name="pc" value="<?php echo $result[0]['Postcode'] ?>">
+                </label>
+                <br>
 
-            <!-- Sign up -->
-            <?php } else { ?>
-                <form method="post" class="signup-form" action="./php/signup.php">
-                    <!-- Name -->
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Username: </h4>
-                        <input type="text" name="name" class="login-input"required>
-                    </label>
+                <p id="change_pass">Change password</p>
+                <label id="form" style="display: none">
+                    Old password: <input type="password" name="old_pass">
                     <br>
+                    New password: <input type="password" name="new_pass">
+                    <br>
+                    Confirm password: <input type="password" name="new_pass_c">
+                </label>
 
-                    <!-- Email -->
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Email: </h4>
-                        <input type="email" name="email" class="login-input" required>
-                    </label>
-                    <br>
+                <input type="hidden" name="id" value="<?php echo $result[0]['Bezoeker_id'] ?>">
+                <input type="submit" name="edit">
+            </form>
 
-                    <!-- Postal code -->
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Postal code: </h4>
-                        <input type="text" name="pc" class="login-input" required>
-                    </label>
-                    <br>
+            <?php if ($result[0]['Is_Admin'] == 1) { ?>
+            <br>
+            <br>
+            <form action="./addAdmin.php" method="post">
+                <label>
+                    <select name="set_status">
+                        <option value="true">Add</option>
+                        <option value="false">Remove</option>
+                    </select>
+                </label>
+                <br>
 
-                    <!-- Pass -->
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Password: </h4>
-                        <input type="password" name="pass" class="login-input" required>
-                    </label>
-                    <br>
-                    <label class="login-form-item">
-                        <h4 class="login-input-context">Confirm password:</h4>
-                        <input type="password" name="pass_c" class="login-input" required>
-                    </label>
+                <label>
+                    Enter username to edit admin status:
+                    <input type="text" name="name">
+                </label>
+                <br>
 
-                    <label>
-                        <small class="login-input-context remember-me">Remember me:</small>
-                        <input type="checkbox" name="remember">
-                    </label>
-                    <br>
-                    <input type="submit" name="signup">
-                    <br>
-
-                    <small><a href="?login=Login"><b><i>Already have an account?</i></b></a></small>
-                </form>
+                <input type="submit" name="addmin">
+            </form>
             <?php } ?>
+
+            <br>
+            <br>
+            <form action="./delete.php" method="post">
+                <label>
+                    To delete account type your pass and submit and confirm:
+                    <input type="text" name="confirm">
+                    <br>
+
+                    Confirm:
+                    <input type="checkbox" name="confirm_box">
+                </label>
+                <br>
+                <input type="hidden" name="id" value="<?php echo $result[0]['Bezoeker_id'] ?>">
+                <input type="submit" name="delete">
+            </form>
         </div>
     </main>
 
@@ -187,24 +197,15 @@
 
     <script src="../../generic/nav.js"></script>
     <script>
-        const input = document.querySelectorAll('.login-input');
-        const headers = document.querySelectorAll('.login-input-context');
+        const button = document.getElementById('change_pass');
+        const pass_form = document.getElementById('form');
+        let opened = false;
 
-        for (let i = 0; i < input.length; i++) {
-            input[i].addEventListener('input', () => {
-                doInput(i);
-            });
+        button.addEventListener('click', () => {
+            opened = !opened;
 
-            doInput(i);
-        }
-
-        function doInput(i) {
-            if (input[i].value.length !== 0) {
-                headers[i].style.display = 'none';
-            } else {
-                headers[i].style.display = 'block';
-            }
-        }
+            pass_form.style.display = opened ? 'block' : 'none';
+        });
     </script>
 </body>
 </html>

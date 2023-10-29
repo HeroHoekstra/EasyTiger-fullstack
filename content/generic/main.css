@@ -51,11 +51,13 @@ nav {
 }
 
 .nav-bar {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 10vw) auto;
 
-    justify-content: space-between;
     align-items: center;
+
+    padding-left: 10px;
 
     background-color: var(--secondary);
 
@@ -66,6 +68,7 @@ nav {
     position: relative;
 
     align-items: center;
+    margin: 0;
 }
 .nav-anchor {
     position: relative;
@@ -79,14 +82,15 @@ nav {
 .nav-anchor .img-arrow {
     vertical-align: middle;
     margin-left: 10px;
+    cursor: pointer;
 }
 .nav-anchor:hover .img-arrow,
-#stay_opened:checked ~ .nav-anchor .img-arrow,
+.stay_opened:checked ~ .nav-anchor .img-arrow,
 .nav-sub-item:hover ~ .nav-anchor .img-arrow {
     rotate: 90deg;
     transition: 250ms;
 }
-#stay_opened {
+.stay_opened {
     display: none;
 }
 
@@ -95,6 +99,7 @@ nav {
     position: absolute;
     top: -500px;
 
+    min-width: 10vw;
     width: max-content;
     padding: 15px 5px 5px 5px;
     font-size: smaller;
@@ -111,7 +116,7 @@ nav {
 
 /* show sub menu on hover of parent */
 .nav-item:hover > .nav-sub-item,
-#stay_opened:checked ~ .nav-sub-item,
+.stay_opened:checked ~ .nav-sub-item,
 .nav-sub-item:hover {
     top: 15px;
 }
@@ -122,13 +127,19 @@ nav {
     text-decoration: none;
 }
 
-.login, .login > a{
-    margin: 5px;
+.login, .login > a {
+    margin: 0 5px;
     padding: 3px;
+    width: max-content;
+
+    justify-self: end;
 }
 .login > a {
     border: 1px solid #0004;
     border-radius: 3px;
+}
+.user-icon {
+    vertical-align: middle;
 }
 
 /* footer default */
@@ -171,5 +182,30 @@ footer a {
 
     .disclaimer {
         grid-column: 1;
+    }
+}
+
+/* Error or success messages*/
+.msg {
+    position: absolute;
+    top: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 200;
+
+    text-align: center;
+
+    min-width: 33vw;
+    width: min-content;
+
+    animation: msgDelivery 5s ease-in-out;
+}
+
+@keyframes msgDelivery {
+    0%, 100% {
+        top: -250px;
+    } 15%, 75% {
+        top: 0;
     }
 }

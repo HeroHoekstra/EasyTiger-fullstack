@@ -1,7 +1,7 @@
 <?php
 // Err1: sign up, passes are not the same
 // Err2: sign up, email already exists
-// Err3: user, incorrect email or password
+// Err3: nav, incorrect email or password
 
 include 'connect.php';
 
@@ -15,7 +15,7 @@ function user_id($pdo) {
     $result = $query->fetchAll();
 
     if ($result != NULL) {
-        user_id();
+        user_id($pdo);
     } else {
         return $user_id;
     }
@@ -61,7 +61,7 @@ try {
             exit();
         }
 
-        // Get user data with $_POST
+        // Get nav data with $_POST
         $user_id = user_id($pdo);
         $username = $_POST['username'];
         $email = $_POST['email'];

@@ -45,15 +45,37 @@ function pageScroll() {
     }
 }
 
+
 // Background gradiant
 document.body.style.background = 'transparent';
 
 const colors = [
-    [125,201,74],
+    [125, 201, 74],
     [5, 51, 122],
     [187, 152, 240],
     [243, 73, 127]
 ];
+
+function getColors(color1, color2) {
+   const scrollPos = window.scrollY;
+   const windowHeight = window.innerHeight;
+   const scrollPercentage = scrollPos / (document.body.clientHeight - windowHeight);
+
+   const index1 = Math.floor(scrollPercentage * (colors.length - 1));
+   const index2 = index1 + 1;
+
+   const color1Weight = index2 - (scrollPercentage * (colors.length - 1));
+   const color2Weight = 1 - color1Weight;
+
+   const interpolatedColors = [
+       Math.round(color1[0] * color1Weight + color2[0] * color2Weight),
+       Math.round(color1[1] * color1Weight + color2[1] * color2Weight),
+       Math.round(color1[2] * color1Weight + color2[2] * color2Weight)
+   ];
+
+   return `rgb(${interpolatedColors[0]}, ${interpolatedColors[1]}, ${interpolatedColors[2]})`;
+}
+
 
 const rotationFactor = 5
 const gradiant = document.getElementById('gradiant');
@@ -86,6 +108,7 @@ function interpolateColors(color1, color2, progress) {
 
     return [r, g, b];
 }
+
 
 // Update nav elements
 window.addEventListener('scroll', () => {

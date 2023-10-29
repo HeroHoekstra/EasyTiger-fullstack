@@ -70,7 +70,7 @@ try {
         <!-- Login and signup -->
         <input type="checkbox" id="login_button">
         <label for="login_button" class="login" aria-label="Open login menu" tabindex="0">
-            <img src="../../assets/svg/user/person-circle.svg" alt="Login button"> Login
+            <img src="../../assets/svg/nav/person-circle.svg" alt="Login button"> Login
         </label>
     </nav>
 

@@ -33,32 +33,6 @@
     rotate: 90deg;
 }
 
-/* background gradiant */
-.follow-gradiant {
-    position: sticky;
-    top: 0;
-    left: 0;
-
-    z-index: -10;
-}
-.background-gradiant,
-.gradiant {
-    position: absolute;
-
-    width: 100vw;
-    height: 100vh;
-}
-
-.background-gradiant {
-    background: radial-gradient(at center, #0000 0%, var(--background) 75%);
-    z-index: -1;
-}
-.gradiant {
-    background: linear-gradient(45deg, var(--secondary), var(--primary));
-    z-index: -2;
-}
-
-
 /* header */
 header {
     display: flex;

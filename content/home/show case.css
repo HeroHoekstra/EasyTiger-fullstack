@@ -36,6 +36,10 @@
     margin: 0;
 }
 
+.price {
+    margin: 0;
+}
+
 /* Band showcases */
 .band-showcase {
     display: flex;

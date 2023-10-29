@@ -52,66 +52,107 @@ try {
     <link href="../generic/main.css" rel="stylesheet" type="text/css">
     <link href="home.css" rel="stylesheet" type="text/css">
     <link href="show%20case.css" rel="stylesheet" type="text/css">
+    <link href="../generic/gradient.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <noscript>Please enable javascript for the site to work properly</noscript>
+    <?php if (isset($_COOKIE['succ'])) { ?>
+        <div class="msg" style="background-color: green">
+            <p><?php echo $_COOKIE['succ'] ?></p>
+        </div>
+    <?php } else if (isset($_COOKIE['err'])) { ?>
+    <div class="msg" style="background-color: red">
+        <p><?php echo $_COOKIE['err'] ?></p>
+    </div>
+    <?php } ?>
 
     <nav>
         <div class="nav-bar" id="nav_bar">
             <div class="nav-item home">
-                <input type="checkbox" id="stay_opened">
+                <input type="checkbox" id="stay_opened_0" class="stay_opened">
                 <div class="nav-sub-item home-list">
                     <!-- Page subsections (if it has them) -->
                     <ul>
                         <li class="select-page-section">
                             <!--suppress HtmlUnknownAnchorTarget -->
-                            <a href="#item_1">About us</a>
+                            <a href="../home#items_1">About us</a>
                         </li>
                         <li class="select-page-section">
                             <!--suppress HtmlUnknownAnchorTarget -->
-                            <a href="#item_2">Our events</a>
+                            <a href="../home#items_2">Our events</a>
                         </li>
                         <li class="select-page-section">
                             <!--suppress HtmlUnknownAnchorTarget -->
-                            <a href="#item_3">Tickets & admission</a>
+                            <a href="../home#items_3">Tickets & admission</a>
                         </li>
                         <li class="select-page-section">
                             <!--suppress HtmlUnknownAnchorTarget -->
-                            <a href="#item_4">Experience & enjoyment</a>
+                            <a href="../home#items_4">Experience & enjoyment</a>
                         </li>
                         <li class="select-page-section">
                             <!--suppress HtmlUnknownAnchorTarget -->
-                            <a href="#item_5">Stay connected</a>
+                            <a href="../home#items_5">Stay connected</a>
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="nav-anchor home-button" tabindex="0">
-                    <label for="stay_opened">
-                        Home <!-- Page title -->
+                <a href="../home" class="nav-anchor home-button" tabindex="0">
+                    <img src="../../assets/svg/nav/house-fill.svg" alt="home icon" class="user-icon">
+                    Home
+                    <label for="stay_opened_0">
                         <img src="../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
                     </label>
                 </a>
             </div>
 
-            <div class="nav-item login">
-                <a href="../user/login/index.php?login=Login">
-                    Login
-                </a>
-
-                <a href="../user/login/index.php?login=Sign up">
-                    Sign up
+            <div class="nav-item">
+                <a href="../events" class="nav-anchor" tabindex="0">
+                    <img src="../../assets/svg/nav/calendar-event.svg" alt="event icon" class="user-icon">
+                    Events
                 </a>
             </div>
-        </div>
 
-        <div class="page-section">
-            <a href="#" class="nav-section-select" id="section_up">
-                <img src="../../assets/svg/misc/caret-right-fill.svg" alt="Section up">
-            </a>
+            <?php if (isset($admin) && $admin) { ?>
+            <div class="nav-item home">
+                <input type="checkbox" id="stay_opened_2" class="stay_opened">
+                <div class="nav-sub-item home-list">
+                    <!-- Page subsections (if it has them) -->
+                    <ul>
+                        <li class="select-page-section">
+                            <a href="../admin/admin%20actions/add_band.php">Add bands</a>
+                        </li>
+                        <li class="select-page-section">
+                            <a href="../admin/admin%20actions/edit_band.php">Edit bands</a>
+                        </li>
+                        <li class="select-page-section">
+                            <a href="../admin/admin%20actions/add_event.php">Add events</a>
+                        </li>
+                        <li class="select-page-section">
+                            <a href="../admin/admin%20actions/edit_event.php">Edit events</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="nav-anchor home-button" tabindex="0">
+                    <img src="../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
+                    Admin
+                    <label for="stay_opened_2">
+                        <img src="../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
+                    </label>
+                </a>
+            </div>
+            <?php } else {echo "<br>";} ?>
 
-            <a href="#" class="nav-section-select" id="section_down">
-                <img src="../../assets/svg/misc/caret-right-fill.svg" alt="Section down">
-            </a>
+            <?php if (isset($_COOKIE['login'])) { ?>
+                <div class="nav-item login">
+                    <a href="../user/edit"><img src="../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
+
+                    <a href="../user/login/php/logout.php"><img src="../../assets/svg/nav/box-arrow-right.svg" alt="log out" class="user-icon"> Log out</a>
+                </div>
+            <?php } else { ?>
+                <div class="nav-item login">
+                    <a href="../user/login/index.php?login=Login">Login</a>
+
+                    <a href="../user/login/index.php?login=Sign%20up">Sign up</a>
+                </div>
+            <?php } ?>
         </div>
     </nav>
 
@@ -175,7 +216,8 @@ try {
                         </div>
                         <div class='event-date'>
                             <h3>" . $event['Per'][0]['Event_Date'] . "</h3>
-                            <a href='../tickets/index.php?event_id=". $event['Event_id'] . "'><i>Get your tickets here!</i></a>
+                            <h4 class='price'>€" . $event['Per'][0]['Event_Price'] . "</h4>
+                            <a href='../events/tickets/index.php?event_id=". $event['Event_id'] . "'><i>Get your tickets here!</i></a>
                         </div>
                         
                         <div class='band-showcase'>
@@ -193,7 +235,7 @@ try {
                  }
                  ?>
             </div>
-            <a href="#" class="more-events"><i><b>And more!</b></i></a>
+            <a href="../events" class="more-events"><i><b>And more!</b></i></a>
         </div>
 
         <div class="main-item">
@@ -278,63 +320,7 @@ try {
 
         window.addEventListener('resize', fitBackground);
     </script>
-    <script>
-        const container = document.getElementById('show_case');
-        const bandShowcases = document.querySelectorAll('.showcase-item');
-
-        // Cycle bands
-        let currentBandCycle = 0;
-        const bands = [];
-
-        for (let i = 0; i < bandShowcases.length; i++) {
-            bands[i] = bandShowcases[i].querySelectorAll('.band-showcase-item');
-        }
-
-        function cycleBands() {
-            const waitTime = 5000;
-            let i = 0;
-
-            function changeBandPos() {
-                for (let j = 0; j < bands.length; j++) {
-                    const currentBand = i % bands[j].length;
-                    for (let k = 0; k < bands[j].length; k++) {
-                        bands[j][k].style.display = 'none';
-                    }
-
-                    bands[j][currentBand].style.display = 'block';
-                }
-                i++;
-            }
-
-            changeBandPos();
-            const interval = setInterval(changeBandPos, waitTime);
-        }
-
-        cycleBands();
-
-        // If band title is too big
-        const bandName = document.querySelectorAll('.event-name > h2');
-        let names = [];
-        for (let i = 0; i < bandName.length; i++) {
-            names.push(bandName[i].innerText);
-        }
-        function change_name(i) {
-            if (window.innerWidth < 430 && names[i].length > 10) {
-                bandName[i].innerText = names[i].slice(0, 8) + "...";
-            } else {
-                bandName[i].innerText = names[i]
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            for (let i = 0; i < bandShowcases.length; i++) {
-                change_name(i);
-            }
-        });
-        for (let i = 0; i < bandShowcases.length; i++) {
-            change_name(i);
-        }
-    </script>
+    <script src="./showcase.js"></script>
     <script src="../generic/nav.js"></script>
 </body>
 </html>
