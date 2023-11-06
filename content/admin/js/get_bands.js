@@ -9,7 +9,7 @@ for (let i = 0; i < cancel_edit.length; i++) {
 
 // Make AJAX request for bands
 var xhr = new XMLHttpRequest();
-xhr.open('GET', './get_bands.php', true);
+xhr.open('GET', '/EasyTiger-fullstack/content/admin/php/get_bands.php', true);
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {

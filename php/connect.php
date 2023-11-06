@@ -17,7 +17,7 @@ try {
         $stmt->closeCursor();
         unset($stmt);
 
-        if ($result[0]['Is_Admin'] == 1) {
+        if (isset($result[0]) && $result[0]['Is_Admin'] == 1) {
             $admin = true;
         }
 

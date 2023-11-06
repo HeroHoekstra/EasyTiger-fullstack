@@ -4,11 +4,11 @@
 // When it does say that the path exists it won't parse the JSON so just don't move it
 
 // Get data
-include "../../php/connect.php";
+include "../../../php/connect.php";
 
 // Get bands
-$bands;
-$members;
+$bands = "";
+$members = "";
 
 try {
     // Get bands
@@ -39,7 +39,7 @@ foreach ($bands as $i=>$band) {
 foreach ($members as $member) {
     foreach ($bands as $i=>$band) {
         if ($member['Band_id'] == $band['Band_id']) {
-            $bands[$i]['members'][count($bands[$i]['members'])] = $member;
+            $bands[$i]['members'][count($band['members'])] = $member;
         }
     }
 }
@@ -50,4 +50,3 @@ $_SESSION['bands'] = $bands;
 $json_data = json_encode($bands);
 header("Content-Type: application/json");
 echo $json_data;
-?>

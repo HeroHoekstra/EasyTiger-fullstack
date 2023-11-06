@@ -2,8 +2,8 @@
 include "../../../php/connect.php";
 
 // Get events
-$events;
-$performances;
+$events = "";
+$performances = "";
 $_bands = [];
 
 try {
@@ -65,7 +65,7 @@ foreach ($events as $i=>$event) {
 foreach ($performances as $performance) {
     foreach ($events as $i=>$event) {
         if ($performance['Event_id'] == $event['Event_id']) {
-            $events[$i]['performance'][count($events[$i]['performance'])] = $performance;
+            $events[$i]['performance'][count($event['performance'])] = $performance;
         }
     }
 }

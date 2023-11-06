@@ -11,6 +11,14 @@ try {
     unset($stmt);
 
     if (password_verify($_POST['confirm'], $result[0]['Pass']) && $_POST['confirm_box']) {
+        // Remove all tickets bought
+        $stmt = $pdo->prepare('DELETE FROM `bezoekers_events` WHERE `Bezoeker_id` = :id');
+        $stmt->bindParam(':id', $_POST['id']);
+        $stmt->execute();
+
+        $stmt->closeCursor();
+
+        // Remove user
         $stmt = $pdo->prepare('DELETE FROM `bezoeker` WHERE `Bezoeker_id` = :id');
         $stmt->bindParam(':id', $_POST['id']);
         $stmt->execute();

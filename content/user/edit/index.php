@@ -47,34 +47,91 @@ try {
     <nav>
         <div class="nav-bar" id="nav_bar">
             <div class="nav-item home">
-                <input type="checkbox" id="stay_opened">
+                <input type="checkbox" id="stay_opened_0" class="stay_opened">
                 <div class="nav-sub-item home-list">
                     <!-- Page subsections (if it has them) -->
                     <ul>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_1">About us</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_1">About us</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_2">Our events</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_2">Our events</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_3">Tickets & admission</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_3">Tickets & admission</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_4">Experience & enjoyment</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_4">Experience & enjoyment</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_5">Stay connected</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_5">Stay connected</a>
                         </li>
                     </ul>
                 </div>
                 <a href="../../home" class="nav-anchor home-button" tabindex="0">
+                    <img src="../../../assets/svg/nav/house-fill.svg" alt="home icon" class="user-icon">
                     Home
-                    <label for="stay_opened">
+                    <label for="stay_opened_0">
                         <img src="../../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
                     </label>
                 </a>
             </div>
+
+            <div class="nav-item">
+                <a href="../../events" class="nav-anchor" tabindex="0">
+                    <img src="../../../assets/svg/nav/calendar-event.svg" alt="event icon" class="user-icon">
+                    Events
+                </a>
+            </div>
+
+            <?php if (isset($admin) && $admin) { ?>
+                <div class="nav-item home">
+                    <input type="checkbox" id="stay_opened_2" class="stay_opened">
+                    <div class="nav-sub-item home-list">
+                        <!-- Page subsections (if it has them) -->
+                        <ul>
+                            <li class="select-page-section">
+                                <a href="../../admin/admin%20actions/add_band.php">Add bands</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../../admin/admin%20actions/edit_band.php">Edit bands</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../../admin/admin%20actions/add_event.php">Add events</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../../admin/admin%20actions/edit_event.php">Edit events</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="../../admin/admin%20actions/add_band.php" class="nav-anchor home-button" tabindex="0">
+                        <img src="../../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
+                        Admin
+                        <label for="stay_opened_2">
+                            <img src="../../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
+                        </label>
+                    </a>
+                </div>
+            <?php } else {echo "<br>";} ?>
+
+            <?php if (isset($_COOKIE['login'])) { ?>
+                <div class="nav-item login">
+                    <a href="../../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
+
+                    <a href="../../user/login/php/logout.php"><img src="../../../assets/svg/nav/box-arrow-right.svg" alt="log out" class="user-icon"> Log out</a>
+                </div>
+            <?php } else { ?>
+                <div class="nav-item login">
+                    <a href="../../user/login/index.php?login=Login">Login</a>
+
+                    <a href="../../user/login/index.php?login=Sign%20up">Sign up</a>
+                </div>
+            <?php } ?>
         </div>
     </nav>
 
@@ -139,7 +196,7 @@ try {
             <form action="./delete.php" method="post">
                 <label>
                     To delete account type your pass and submit and confirm:
-                    <input type="text" name="confirm">
+                    <input type="password" name="confirm">
                     <br>
 
                     Confirm:

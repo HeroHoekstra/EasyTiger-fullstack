@@ -1,7 +1,7 @@
 // Make AJAX request for events
 const ev_xhr = new XMLHttpRequest();
 
-ev_xhr.open('GET', './php/get_events.php', true);
+ev_xhr.open('GET', '/EasyTiger-fullstack/content/admin/php/get_events.php', true);
 ev_xhr.onreadystatechange = function() {
     if (ev_xhr.readyState === 4) {
         if (ev_xhr.status === 200) {
@@ -14,7 +14,7 @@ ev_xhr.onreadystatechange = function() {
                 for (let j = 0; j < data.length; j++) {
                     if (data[j].Event_id === edit_button[i].parentNode.dataset.event_id) {
                         edit_button[i].addEventListener('click', () => {
-                            cancel_edit[1].parentNode.parentNode.style.display = "flex";
+                            cancel_edit[0].parentNode.parentNode.style.display = "flex";
                             document.getElementById('edit_event_id').value = data[j].Event_id;
 
                             // Edit all basic things (Name, price etc.)

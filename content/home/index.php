@@ -50,8 +50,8 @@ try {
 
     <!-- Main CSS for nav and footer -->
     <link href="../generic/main.css" rel="stylesheet" type="text/css">
-    <link href="home.css" rel="stylesheet" type="text/css">
-    <link href="show%20case.css" rel="stylesheet" type="text/css">
+    <link href="css/home.css" rel="stylesheet" type="text/css">
+    <link href="css/show%20case.css" rel="stylesheet" type="text/css">
     <link href="../generic/gradient.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -130,7 +130,7 @@ try {
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="nav-anchor home-button" tabindex="0">
+                <a href="../admin/admin%20actions/add_band.php" class="nav-anchor home-button" tabindex="0">
                     <img src="../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
                     Admin
                     <label for="stay_opened_2">

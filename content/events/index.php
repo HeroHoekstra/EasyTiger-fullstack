@@ -42,6 +42,11 @@ try {
 }
 
 function ticketItem($event, $past) {
+    $set = false;
+    if (isset($_COOKIE['login'])) {
+        $set = true;
+    }
+
     $msg = "";
     if (!$past) {
         $msg = "Get your tickets here!";
@@ -51,7 +56,11 @@ function ticketItem($event, $past) {
 
     $link = "#";
     if (!$past) {
-        $link = "./tickets/index.php?event_id=" . $event['Event_id'];
+        if ($set) {
+            $link = "./tickets/index.php?event_id=" . $event['Event_id'];
+        } else {
+            $link = "../user/login";
+        }
     } else {
         $link = "?filter=Upcoming";
     }
@@ -94,9 +103,19 @@ function ticketItem($event, $past) {
 
     <link href="../generic/main.css" rel="stylesheet" type="text/css">
     <link href="./main.css" rel="stylesheet" type="text/css">
-    <link href="../home/show%20case.css" rel="stylesheet" type="text/css">
+    <link href="../home/css/show%20case.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <?php  if (isset($_COOKIE['succ'])) { ?>
+        <div class="msg" style="background-color: green">
+            <p><?php echo $_COOKIE['succ'] ?></p>
+        </div>
+    <?php } else if (isset($_COOKIE['err'])) { ?>
+        <div class="msg" style="background-color: red">
+            <p><?php echo $_COOKIE['err'] ?></p>
+        </div>
+    <?php } ?>
+
     <nav>
         <div class="nav-bar" id="nav_bar">
             <div class="nav-item home">
@@ -142,33 +161,35 @@ function ticketItem($event, $past) {
                 </a>
             </div>
 
-            <div class="nav-item home">
-                <input type="checkbox" id="stay_opened_2" class="stay_opened">
-                <div class="nav-sub-item home-list">
-                    <!-- Page subsections (if it has them) -->
-                    <ul>
-                        <li class="select-page-section">
-                            <a href="../admin/admin%20actions/add_band.php">Add bands</a>
-                        </li>
-                        <li class="select-page-section">
-                            <a href="../admin/admin%20actions/edit_band.php">Edit bands</a>
-                        </li>
-                        <li class="select-page-section">
-                            <a href="../admin/admin%20actions/add_event.php">Add events</a>
-                        </li>
-                        <li class="select-page-section">
-                            <a href="../admin/admin%20actions/edit_event.php">Edit events</a>
-                        </li>
-                    </ul>
+            <?php if (isset($admin) && $admin) { ?>
+                <div class="nav-item home">
+                    <input type="checkbox" id="stay_opened_2" class="stay_opened">
+                    <div class="nav-sub-item home-list">
+                        <!-- Page subsections (if it has them) -->
+                        <ul>
+                            <li class="select-page-section">
+                                <a href="../admin/admin%20actions/add_band.php">Add bands</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../admin/admin%20actions/edit_band.php">Edit bands</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../admin/admin%20actions/add_event.php">Add events</a>
+                            </li>
+                            <li class="select-page-section">
+                                <a href="../admin/admin%20actions/edit_event.php">Edit events</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="../admin/admin%20actions/add_band.php" class="nav-anchor home-button" tabindex="0">
+                        <img src="../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
+                        Admin
+                        <label for="stay_opened_2">
+                            <img src="../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
+                        </label>
+                    </a>
                 </div>
-                <a href="#" class="nav-anchor home-button" tabindex="0">
-                    <img src="../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
-                    Admin
-                    <label for="stay_opened_2">
-                        <img src="../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
-                    </label>
-                </a>
-            </div>
+            <?php } else {echo "<br>";} ?>
 
             <?php if (isset($_COOKIE['login'])) { ?>
                 <div class="nav-item login">

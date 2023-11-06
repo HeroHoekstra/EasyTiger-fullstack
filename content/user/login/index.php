@@ -35,34 +35,63 @@
     <nav>
         <div class="nav-bar" id="nav_bar">
             <div class="nav-item home">
-                <input type="checkbox" id="stay_opened">
+                <input type="checkbox" id="stay_opened_0" class="stay_opened">
                 <div class="nav-sub-item home-list">
                     <!-- Page subsections (if it has them) -->
                     <ul>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_1">About us</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_1">About us</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_2">Our events</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_2">Our events</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_3">Tickets & admission</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_3">Tickets & admission</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_4">Experience & enjoyment</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_4">Experience & enjoyment</a>
                         </li>
                         <li class="select-page-section">
-                            <a href="../../home/index.php#item_5">Stay connected</a>
+                            <!--suppress HtmlUnknownAnchorTarget -->
+                            <a href="../../home#items_5">Stay connected</a>
                         </li>
                     </ul>
                 </div>
                 <a href="../../home" class="nav-anchor home-button" tabindex="0">
+                    <img src="../../../assets/svg/nav/house-fill.svg" alt="home icon" class="user-icon">
                     Home
-                    <label for="stay_opened">
+                    <label for="stay_opened_0">
                         <img src="../../../assets/svg/misc/caret-right-fill.svg" alt="arrow" class="img-arrow">
                     </label>
                 </a>
             </div>
+
+            <div class="nav-item">
+                <a href="../../events" class="nav-anchor" tabindex="0">
+                    <img src="../../../assets/svg/nav/calendar-event.svg" alt="event icon" class="user-icon">
+                    Events
+                </a>
+            </div>
+
+            <br>
+
+            <?php if (isset($_COOKIE['login'])) { ?>
+                <div class="nav-item login">
+                    <a href="../../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
+
+                    <a href="../../user/login/php/logout.php"><img src="../../../assets/svg/nav/box-arrow-right.svg" alt="log out" class="user-icon"> Log out</a>
+                </div>
+            <?php } else { ?>
+                <div class="nav-item login">
+                    <a href="../../user/login/index.php?login=Login">Login</a>
+
+                    <a href="../../user/login/index.php?login=Sign%20up">Sign up</a>
+                </div>
+            <?php } ?>
         </div>
     </nav>
 

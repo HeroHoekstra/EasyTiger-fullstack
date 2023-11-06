@@ -66,9 +66,10 @@ try {
         ':name' => $name,
         ':email' => $email,
         ':pc' => $pc,
-        ':pass' => $pass
+        ':pass' => $pass,
+        ':admin' => 0
     ];
-    $stmt = $pdo->prepare('INSERT INTO `bezoeker` (`Bezoeker_id`, `Username`, `Email`, `Postcode`, `Pass`) VALUES (:id, :name, :email, :pc, :pass)');
+    $stmt = $pdo->prepare('INSERT INTO `bezoeker` (`Bezoeker_id`, `Username`, `Email`, `Postcode`, `Pass`, `Is_Admin`) VALUES (:id, :name, :email, :pc, :pass, :admin)');
     $stmt->execute($data);
     $stmt->closeCursor();
 

@@ -20,8 +20,8 @@ if (!isset($admin) || !$admin) {
 
     <!-- Stylesheets -->
     <link href="../../generic/main.css" rel="stylesheet" type="text/css">
-    <link href="../../generic/gradient.css" rel="stylesheet" type="text/css">
-    <link href="../main.css" rel="stylesheet" type="text/css">
+    <link href="../css/buttons.css" rel="stylesheet" type="text/css">
+    <link href="../css/layout.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <?php  if (isset($_COOKIE['succ'])) { ?>
@@ -98,7 +98,7 @@ if (!isset($admin) || !$admin) {
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="nav-anchor home-button" tabindex="0">
+                <a href="../../admin/admin%20actions/add_band.php" class="nav-anchor home-button" tabindex="0">
                     <img src="../../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
                     Admin
                     <label for="stay_opened_2">
@@ -109,7 +109,7 @@ if (!isset($admin) || !$admin) {
 
             <?php if (isset($_COOKIE['login'])) { ?>
                 <div class="nav-item login">
-                    <a href="../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
+                    <a href="../../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
 
                     <a href="../../user/login/php/logout.php"><img src="../../../assets/svg/nav/box-arrow-right.svg" alt="log out" class="user-icon"> Log out</a>
                 </div>
@@ -225,8 +225,8 @@ if (!isset($admin) || !$admin) {
         </div>
     </footer>
 
-    <script src="../../generic/nav.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/change_values.js"></script>
+    <script src="../js/get_bands.js"></script>
 </body>
 </html>

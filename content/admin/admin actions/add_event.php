@@ -5,6 +5,22 @@ if (!isset($admin) || !$admin) {
     header('Location: ../../home');
     exit();
 }
+
+// Get bands
+ob_start();
+require('../php/get_bands.php');
+session_start();
+$bands = $_SESSION['bands'];
+ob_end_clean();
+
+// Get events
+ob_start();
+require('../php/get_events.php');
+session_start();
+$events = $_SESSION['events'];
+ob_end_clean();
+
+header('Content-Type: text/html');
 ?>
 
 <!doctype html>
@@ -20,6 +36,8 @@ if (!isset($admin) || !$admin) {
 
     <!-- Stylesheets -->
     <link href="../../generic/main.css" rel="stylesheet" type="text/css">
+    <link href="../css/layout.css" rel="stylesheet" type="text/css">
+    <link href="../css/buttons.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <?php  if (isset($_COOKIE['succ'])) { ?>
@@ -70,6 +88,13 @@ if (!isset($admin) || !$admin) {
             </a>
         </div>
 
+        <div class="nav-item">
+            <a href="../../events" class="nav-anchor" tabindex="0">
+                <img src="../../../assets/svg/nav/calendar-event.svg" alt="event icon" class="user-icon">
+                Events
+            </a>
+        </div>
+
         <div class="nav-item home">
             <input type="checkbox" id="stay_opened_2" class="stay_opened">
             <div class="nav-sub-item home-list">
@@ -89,7 +114,7 @@ if (!isset($admin) || !$admin) {
                     </li>
                 </ul>
             </div>
-            <a href="#" class="nav-anchor home-button" tabindex="0">
+            <a href="../../admin/admin%20actions/add_band.php" class="nav-anchor home-button" tabindex="0">
                 <img src="../../../assets/svg/nav/laptop.svg" alt="admin icon" class="user-icon">
                 Admin
                 <label for="stay_opened_2">
@@ -100,7 +125,7 @@ if (!isset($admin) || !$admin) {
 
         <?php if (isset($_COOKIE['login'])) { ?>
             <div class="nav-item login">
-                <a href="../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
+                <a href="../../user/edit"><img src="../../../assets/svg/nav/person-circle.svg" alt="user icon" class="user-icon"> <?php echo $_COOKIE['login'] ?></a>
 
                 <a href="../../user/login/php/logout.php"><img src="../../../assets/svg/nav/box-arrow-right.svg" alt="log out" class="user-icon"> Log out</a>
             </div>
@@ -115,8 +140,67 @@ if (!isset($admin) || !$admin) {
 </nav>
 
 <main>
-    <div class="main-item">
+    <div class="main-item add_event">
+        <input type="checkbox" id="open_add_event_menu" class="open_menu_button">
+        <label for="open_add_event_menu" aria-label="Open create new event menu" tabindex="0">
+            <h1 class="open_menu_text">Add event <img src="../../../assets/svg/misc/caret-right-fill.svg" alt="open menu button" class="open_menu_img"></h1>
+        </label>
 
+        <div class="menu_content menu_openable">
+            <form action="../php/add_event.php" method="post">
+                <ul class="form_list">
+                    <li>
+                        <h3 class="item_title">Event name:</h3>
+                        <input type="text" name="event_name" aria-label="Input field for the event name" tabindex="0" required>
+                    </li>
+                    <li>
+                        <h3 class="item_title">Price:</h3>
+                        <input type="number" name="price" aria-label="Input field for the event'script price" tabindex="0" step="0.01" required>
+                    </li>
+                    <li>
+                        <h3 class="item_title">Date:</h3>
+                        <input type="date" name="date" aria-label="Input field for the event date" tabindex="0" required>
+                    </li>
+                    <li>
+                        <h3 class="item_title">Start time:</h3>
+                        <input type="time" name="start_time" aria-label="Input field for the event's start time" tabindex="0" required>
+                    </li>
+                    <li>
+                        <ul>
+                            <h3>Select band:</h3>
+                            <small class="found_display"></small>
+                            <br>
+                            <input type="text" class="search" aria-label="Search band by name" tabindex="0" autocomplete="off">
+                        </ul>
+
+                        <div id="band_add">
+                            <?php
+                            foreach ($bands as $band) {
+                                echo "
+                                    <div class=\"edit_band_band\" data-band_id=\"" . $band['Band_id'] . "\">
+                                        <p class=\"band_title\" data-name=\"" . $band['Naam'] . "\"><b>" . $band['Naam'] . "</b></p>
+                                        <ul class=\"band_attributes\">
+                                            <li>Genre: " . $band['Genre'] . "</li>
+                                            <li>Origin: " . $band['Herkomst'] . "</li>
+                                            <li>" . count($band['members']) . " band members</li>
+                                        </ul>
+                                        <p class=\"add edit\">[add]</p>
+                                    </div>
+                                    ";
+                            }
+                            ?>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="added_bands">
+
+                        </div>
+                    </li>
+                </ul>
+
+                <input type="submit" name="add_event" value="Add event" aria-label="Submit the event to the database">
+            </form>
+        </div>
     </div>
 </main>
 
@@ -164,5 +248,7 @@ if (!isset($admin) || !$admin) {
 </footer>
 
 <script src="../../generic/nav.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/change_values.js"></script>
 </body>
 </html>

@@ -1,128 +1,106 @@
-/* Header */
-header {
-    width: 100svw;
-    
-    background-color: #000;
-    color: #fff;
-}
-
-.title {
-    display: flex;
-    flex-wrap: wrap;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 30px;
-}
-.title img {
-    width: 80svw;
-}
-
-/* Main (Not the ticket & future prices) */
-main {
+/* nav select sections */
+.page-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-.subsection {
-    margin: 5px;
-
-    width: 75svw;
-}
-.subsection-title {
-    margin: 0;
-}
-.subsection-text {
-    margin: 0;
-    margin-left: 25px;
-}
-
-/* Ticket and future prices*/
-.upcoming {
-    width: 100svw;
-
-    color: white;
-    background-color: black;
-}
-.upcoming-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    margin: 0 auto;
-
-    width: 75svw;
-}
-
-.upcoming-event{
-    display: grid;
-    grid-template-columns: 50% 32% 3%;
-    grid-template-rows: repeat(3, auto);
-
-    grid-template-areas: 
-        "title date expand" 
-        "title genre \n"
-        "title tickets \n";
 
     justify-content: center;
 
-    width: 100%;
-}
-.event-title {
-    grid-area: title;
-
-    font-size: 46px;
-}
-.event-date {
-    grid-area: date;
-
-    margin: 0;
-
-    height: fit-content;
-
-    font-size: 42px;
-    text-align: right;
-}
-.event-genre {
-    grid-area: genre;
-
-    margin: 0;
-
-    font-size: 36px;
-    text-align: right;
-}
-.tickets-left {
-    grid-area: tickets;
-
-    margin: 0;
-
-    font-size: 16px;
-    text-align: right;
-}
-
-/* Error msg */
-.message {
     position: absolute;
+    right: 0;
+    top: 50vh;
 
-    width: 20vw;
+    z-index: 100;
+}
+.nav-section-select {
+    display: flex;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border:solid white 1px;
+    border-radius: 50%;
+
+    background-color: #000A1A80;
+}
+.nav-section-select img {
+    width: 24px;
+}
+.page-section a:nth-of-type(1) {
+    rotate: -90deg;
+}
+.page-section a:nth-of-type(2) {
+    rotate: 90deg;
+}
+
+/* header */
+header {
+    display: flex;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-image:
+            linear-gradient(to bottom, #0000, #0000, var(--background)),
+            url("../../../assets/webp/concert.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.header-title-container {
+    position: relative;
+
     height: max-content;
-    padding: 7px;
-    margin: auto;
+    width: max-content;
+}
+
+.header-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--background);
+}
+
+.header-title {
+    margin: 0;
+    padding: 10px;
+    height: max-content;
 
     text-align: center;
-    line-height: 30px;
 
-    left: 0;
-    right: 0;
+    background-image: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 
-    animation: move_up;
-    animation-duration: 2.5s;
-    animation-fill-mode: forwards;
-    transition: ease-in-out;
+    backdrop-filter: blur(2px);
 }
-.err_msg {
-    background-color: rgb(230, 130, 130);
-    border: solid 2px rgb(200, 115, 115);
-    border-radius: 3px;
+
+/* Add break when small screen */
+@media only screen and (max-width: 850px) {
+    .company-name::after {
+        content: '\a';
+        white-space: pre;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .header-title {
+        font-size: 27px;
+    }
+}
+@media only screen and (max-width: 370px) {
+    .header-title {
+        font-size: 25px;
+    }
+}
+
+/* main content */
+.main-item {
+    padding-top: 20px;
+    min-height: 100vh;
+    height: min-content;
 }
